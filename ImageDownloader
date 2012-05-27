@@ -24,7 +24,13 @@ end
 # Displays a message to STDOUT if no arguments or no url
 
 if ARGV.empty? || url.empty? then 
-	puts "#{$0} [[-D] [-t downloadpath]] [-R regexp] -U url"
+	puts "#{$0} [[-D] [-t path]] [-R regexp] -U url"
+	puts "Usage"
+	puts "-----"
+	puts "-D	The download trigger."
+	puts "-t	The target path."
+	puts "-R	RegExp pattern"
+	puts "-U	The URL."
 	exit
 end
 
