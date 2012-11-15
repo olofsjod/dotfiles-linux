@@ -140,6 +140,11 @@ elsif !downl_mode then
 		puts "#{link}"
 	end
 
-	puts "To download, please add an -D to the command" # TODO: (y/n) option
+    puts "Do you want to leech these links to #{downl_path}?"
+
+    case gets.strip
+    when 'Y', 'y'
+        downl_all(link_sherlock(url, regex, user_agent), downl_path)
+    end
 
 end
