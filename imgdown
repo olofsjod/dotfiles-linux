@@ -126,6 +126,25 @@ def if_exists(file_n, cmp_a)
 	return false
 end
 
+def yesno
+    loop do
+        begin
+              system("stty raw -echo")
+              str = STDIN.getc
+        ensure
+              system("stty -raw echo")
+        end
+
+        if str == "Y" || str == "y"
+            return true
+        elsif str == "N" || str == "n"
+            return false
+        else
+            puts "Please enter [y]es or [n]o."
+        end
+    end
+end
+
 downl_mode 	= opts[:download]			
 downl_path 	= opts[:destination]
 regex 		= opts[:reg_ex]
@@ -140,11 +159,12 @@ elsif !downl_mode then
 		puts "#{link}"
 	end
 
-    puts "Do you want to leech these links to #{downl_path}?"
+    puts "Do you want to leech these links to #{downl_path}? [y/n]"
+    dl = yesno
 
-    case gets.strip
-    when 'Y', 'y'
-        downl_all(link_sherlock(url, regex, user_agent), downl_path)
+    if dl then
+	    downl_all(link_sherlock(url, regex, user_agent), downl_path)
+    elsif !dl then
+        puts "Good bye"
     end
-
 end
