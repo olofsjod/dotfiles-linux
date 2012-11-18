@@ -81,6 +81,8 @@ def link_sherlock(url, regexp, user_agent) # Search document and substituting lo
 				_m_links.push("#{hostn_extract(url)}/#{link}")
 			when /^\/\/http:\/\/(.*\.(jpe?g|png|gif))$/	# FIXME: Change the regex to a substitution instead.
 				_m_links.push("http://#{$1}")
+            when /^\/\/(?!https?)(.*\.(jpe?g|png|gif))$/
+                _m_links.push("http://#{$1}")
 			end
 		end
 	end
