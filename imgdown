@@ -155,16 +155,18 @@ if downl_mode then
 	downl_all(link_sherlock(url, regex, user_agent), downl_path)
 
 elsif !downl_mode then
-	link_sherlock(url, regex, user_agent).each do |link|
-		puts "#{link}"
-	end
-
-    puts "Do you want to leech these links to #{downl_path}? [y/n]"
-    dl = yesno
-
-    if dl then
-	    downl_all(link_sherlock(url, regex, user_agent), downl_path)
-    elsif !dl then
-        puts "Good bye"
+    links_a = link_sherlock(url, regex, user_agent)
+	
+    if links_a.count > 0 then 
+        links_a.each do |link|
+	    	puts "#{link}"
+	    end
+        puts "Do you want to leech these links to #{downl_path}? [y/n]"
+        dl = yesno
+        if dl then
+	        downl_all(link_sherlock(url, regex, user_agent), downl_path)
+        elsif !dl then
+            puts "Good bye"
+        end
     end
 end
