@@ -110,22 +110,22 @@ def downl_all(array_w_links, dwl_path)
 	f_names = Dir["#{dwl_path}/*"].map { |path| filen_extract(path) }
 	
 	array_w_links.each do |url|
-		if !if_exists(filen_extract(url), f_names) then
+		if if_doublet(filen_extract(url), f_names) != true then
 			downl_f(url, dwl_path)
 		end
 	end
 end
 
-def if_exists(file_n, cmp_a)
-	safe = false
+def if_doublet(file_n, cmp_a)
+	doublet = false
 	cmp_a.each do |link|
 		if "#{file_n}" == "#{link}"
-			safe = false
+			doublet = true
 			puts "There was already an '#{file_n}' in the directory!"
 			break
 		end
 	end
-	return false
+	return doublet
 end
 
 def yesno
