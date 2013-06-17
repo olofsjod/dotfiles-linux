@@ -39,7 +39,7 @@ noremap! jj <Esc>                   "<Esc> to jj
 let mapleader = ","                 " setting leader to , 
 
 "" Color Scheme
-colorscheme tomorrow_night          " Tomorrow Theme
+colorscheme Tomorrow-Night " Tomorrow Theme
 
 set laststatus=2                    " Always show the statusline
 
