@@ -7,7 +7,7 @@ cur_path=`pwd`
 #git submodule update
 
 echo "Deleting the old files"
-rm ~/.bash_login
+rm ~/.bash_profile
 rm ~/.vimrc
 rm ~/.vim
 rm ~/.gvimrc
@@ -16,7 +16,7 @@ rm ~/.gitignore
 rm ~/.githelpers
 
 echo "Symlinking files"
-ln -s $cur_path/bash_login ~/.bash_login
+ln -s $cur_path/bash_profile ~/.bash_profile
 ln -s $cur_path/vimrc ~/.vimrc
 ln -s $cur_path/vim ~/.vim
 ln -s $cur_path/gvimrc ~/.gvimrc
