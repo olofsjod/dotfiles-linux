@@ -8,6 +8,7 @@ cur_path=`pwd`
 
 echo "Deleting the old files"
 rm ~/.bash_profile
+rm ~/.bashrc
 rm ~/.vimrc
 rm ~/.vim
 rm ~/.gvimrc
@@ -17,6 +18,7 @@ rm ~/.githelpers
 
 echo "Symlinking files"
 ln -s $cur_path/bash_profile ~/.bash_profile
+ln -s $cur_path/bashrc ~/.bashrc
 ln -s $cur_path/vimrc ~/.vimrc
 ln -s $cur_path/vim ~/.vim
 ln -s $cur_path/gvimrc ~/.gvimrc
