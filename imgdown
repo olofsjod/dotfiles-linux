@@ -1,0 +1,176 @@
+#!/usr/bin/env ruby 
+# encoding: utf-8
+
+"""""""
+ImageDownloader
+
+Olof Sjödin
+me@olofsjodin.se
+
+I didn't found any application that did what I wanted it to do, and
+I wanted my own application so I created this. That was how ImgDown
+was born.
+
+This is what ImgDown do.
+	- Getting all <img src='x'> and <a href='x'> (NEW) in a webpage and downloading every single one those you choose with regex.
+	- Sort the links with the help of RegEx.
+	- Could show all the links BEFORE downloading them. (YEAAAAH)
+
+"""""""
+
+require 'nokogiri'
+require 'open-uri'
+require 'trollop'
+
+
+opts = Trollop::options do
+	version "ImgDown v0.2"
+	banner <<-EOS
+ImgDown is a program who download imagefiles from a webpage.
+	
+Usage:
+	imgdown [options]
+
+	where the [options] is
+EOS
+	
+	opt :download, "This trigger the download sequence.", :short => 'd', :default => false
+	opt :reg_ex, "Here do you write the Regular Expression. The matches from the regular expression is the links to the images you will download.", :short => 'r', :type => String, :default => "(.*)" # TODO: How does the regex for this program work.
+	opt :link, "Link to the page that you want to download images from.", :short => 'l', :type => String
+	opt :destination, "The folder you want to download images to.", :short => 't', :type => String, :default => Dir.pwd
+	opt :user_agent, "If you want to set a alternative user-agent", :short => 's', :type => String, :default => "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.4 (KHTML, like Gecko) Chrome/22.0.1229.94 Safari/537.4"
+    opt :overwrite, "If you want to overwrite existing files with the same name", :short => 'ow', :default => false 
+end
+
+Trollop::die :link, "must exist" if opts[:link] == "" || opts[:link] == nil
+
+# Dir["#{downl_path}/*"].each do |fname|
+# f_names.push(filen_extract(fname))
+# end
+
+def filen_extract(uri)
+	uri =~ /^.*\/(.*)\.(.*)$/
+	if uri == "" or uri == nil then
+		return ""
+	else
+		return "#{$1}.#{$2}"
+	end
+end
+
+def hostn_extract(uri)
+	uri =~ /^(https?:\/\/.*[a-z]+\.[a-z]+)\/?.*$/
+	return "#{$1}"
+end
+
+def link_sherlock(url, regexp, user_agent) # Search document and substituting loose ends
+	_nokogiri_html_img = Nokogiri::HTML(open(url, 'User-Agent' => user_agent)).xpath('.//img/@src').to_a
+	_nokogiri_html_a = Nokogiri::HTML(open(url)).xpath('.//a/@href').to_a
+	
+	_links_array = _nokogiri_html_img + _nokogiri_html_a
+	
+	_m_links = []
+	
+	# Fixing links
+	_links_array.each do |link|
+		if "#{link}" =~ /#{regexp}/
+			case link
+			when /^\/[^\/].*\.(jpe?g|png|gif)$/
+				_m_links.push("#{hostn_extract(url)}#{link}")
+			when /^https?:\/\/.*\.(jpe?g|png|gif)$/
+				_m_links.push("#{link}")
+			when /^[a-zA-Z0-9]+.*\.(jpe?g|png|gif)$/
+				_m_links.push("#{hostn_extract(url)}/#{link}")
+			when /^\/\/http:\/\/(.*\.(jpe?g|png|gif))$/	# FIXME: Change the regex to a substitution instead.
+				_m_links.push("http://#{$1}")
+            when /^\/\/(?!https?)(.*\.(jpe?g|png|gif))$/
+                _m_links.push("http://#{$1}")
+			end
+		end
+	end
+	
+	# No matches.
+	if _m_links.count == 0
+		puts "Zero matches."
+	end
+
+	# Return matches.
+	return _m_links
+end
+
+def downl_f(file_uri, downl_path)
+	puts "Downloading #{file_uri}..."
+	_file_h = open("#{downl_path}/#{filen_extract(file_uri)}", "wb")
+	_file_h.write(open(file_uri).read)
+	_file_h.close
+end
+
+
+def downl_all(array_w_links, dwl_path)
+	puts "Downloading..."
+
+	f_names = Dir["#{dwl_path}/*"].map { |path| filen_extract(path) }
+	
+	array_w_links.each do |url|
+        if opts[:overwrite] == true then
+            downl_f(url, dwl_path)
+        elsif if_doublet(filen_extract(url), f_names) != true then
+			downl_f(url, dwl_path)
+		end
+	end
+end
+
+def if_doublet(file_n, cmp_a)
+	doublet = false
+	cmp_a.each do |link|
+		if "#{file_n}" == "#{link}"
+			doublet = true
+			puts "There was already an '#{file_n}' in the directory!"
+		end
+	end
+	return doublet
+end
+
+def yesno
+    loop do
+        begin
+              system("stty raw -echo")
+              str = STDIN.getc
+        ensure
+              system("stty -raw echo")
+        end
+
+        if str == "Y" || str == "y"
+            return true
+        elsif str == "N" || str == "n"
+            return false
+        else
+            puts "Please enter [y]es or [n]o."
+        end
+    end
+end
+
+downl_mode 	= opts[:download]			
+downl_path 	= opts[:destination]
+regex 		= opts[:reg_ex]
+url 		= opts[:link]
+user_agent  = opts[:user_agent]
+
+if downl_mode then
+	downl_all(link_sherlock(url, regex, user_agent), downl_path)
+
+elsif !downl_mode then
+    links_a = link_sherlock(url, regex, user_agent)
+	
+    if links_a.count > 0 then 
+        links_a.each do |link|
+	    	puts "#{link}"
+	    end
+        puts "Do you want to leech these links to #{downl_path}? [y/n]"
+        dl = yesno
+        if dl then
+	        downl_all(link_sherlock(url, regex, user_agent), downl_path)
+        elsif !dl then
+            puts "Good bye"
+        end
+    end
+end
