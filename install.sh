@@ -6,7 +6,8 @@ cur_path=`pwd`
 #git submodule init
 #git submodule update
 
-echo "Deleting the old files"
+
+echo "Deleting the old symlinks"
 rm ~/.bash_profile
 rm ~/.bashrc
 rm ~/.vimrc
@@ -28,6 +29,12 @@ ln -s $cur_path/githelpers ~/.githelpers
 
 #echo "Updating submodules"
 #git submodule foreach git pull origin master --recurse-submodules
+
+echo "Installing vim plugins/themes"
+curl -s https://raw.github.com/chriskempson/tomorrow-theme/master/vim/colors/Tomorrow-Night.vim -o ~/.vim/colors/Tomorrow-Night.vim
+
+curl -s https://raw.github.com/tpope/vim-pathogen/master/autoload/pathogen.vim -o ~/.vim/autoload/pathogen.vim
+ 
 
 echo "All done."
 

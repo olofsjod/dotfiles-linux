@@ -10,7 +10,7 @@ echo "Uninstalling."
 rm ~/.bash_profile
 rm ~/.bashrc
 rm ~/.vimrc
-rm ~/.vim
+rm -rf $cur_path/.vim
 rm ~/.gvimrc
 rm ~/.gitconfig
 rm ~/.gitignore
