@@ -7,13 +7,15 @@ cur_path=`pwd`
 #git submodule update
 
 echo "Uninstalling."
+rm -rf $cur_path/.vim
 rm ~/.bash_profile
 rm ~/.bashrc
 rm ~/.vimrc
-rm -rf $cur_path/.vim
 rm ~/.gvimrc
 rm ~/.gitconfig
 rm ~/.gitignore
 rm ~/.githelpers
+rm ~/.conkyrc
+rm ~/.Xresources
 
 echo "Done."
