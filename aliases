@@ -1,0 +1,6 @@
+#!/bin/bash
+# Aliases
+alias l="ls -lhF --group-directories-first --color"
+alias lll="ls -lhF --group-directories-first | less"
+alias la="ls -lAhFd --group-directories-first --color .[^.]*"
+alias df="df -hT"

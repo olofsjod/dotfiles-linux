@@ -19,8 +19,10 @@ rm ~/.gitignore
 rm ~/.githelpers
 rm ~/.Xresources
 rm ~/.conkyrc
+rm ~/.aliases
 
 echo "Symlinking files"
+ln -s $cur_path/aliases ~/.aliases
 ln -s $cur_path/bash_profile ~/.bash_profile
 ln -s $cur_path/bashrc ~/.bashrc
 ln -s $cur_path/vimrc ~/.vimrc

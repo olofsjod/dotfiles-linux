@@ -17,5 +17,6 @@ rm ~/.gitignore
 rm ~/.githelpers
 rm ~/.conkyrc
 rm ~/.Xresources
+rm ~/.aliases
 
 echo "Done."
