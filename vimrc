@@ -1,6 +1,6 @@
 call pathogen#incubate()
 call pathogen#helptags()
-
+colorscheme Tomorrow-Night
 set nocompatible                    " choose no compatibility with legacy vi
 syntax enable
 
@@ -37,9 +37,6 @@ noremap! jj <Esc>                   "<Esc> to jj
 
 "" Mapping 
 let mapleader = ","                 " setting leader to , 
-
-"" Color Scheme
-colorscheme Tomorrow-Night " Tomorrow Theme
 
 set laststatus=2                    " Always show the statusline
 

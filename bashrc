@@ -1,4 +1,5 @@
 # .bash_login
+[ -n "$XTERM_VERSION" ] && transset 0.8 -a >/dev/null
 
 # Visar kataloger först, sedan filer. Med färg. 
 alias l="ls -lhF --group-directories-first --color"
