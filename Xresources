@@ -1,3 +1,5 @@
 xterm*faceName: anonymouspro:pixelsize=14
 xterm*utf8: true
 xterm*loginShell: true
+XTerm*eightBitInput: false
+XTerm*metaSendsEscape: true
