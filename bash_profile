@@ -5,7 +5,7 @@
 
 # Makes xterm transparent
 [ -n "$XTERM_VERSION" ] && transset 0.8 -a >/dev/null
-
+PATH=$PATH:~/bin
 cowsay `fortune`  
 
 uptime 
