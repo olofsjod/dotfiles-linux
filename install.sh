@@ -9,17 +9,8 @@ cur_path=`pwd`
 mkdir -p $cur_path/vim/{colors,autoload}
 
 echo "Deleting the old symlinks"
-rm ~/.bash_profile
-rm ~/.bashrc
-rm ~/.vimrc
-rm ~/.vim
-rm ~/.gvimrc
-rm ~/.gitconfig
-rm ~/.gitignore
-rm ~/.githelpers
-rm ~/.Xresources
-rm ~/.conkyrc
-rm ~/.aliases
+rm -f {~/.bash_profile,~/.bashrc,~/.vimrc,~/.vim,~/.gvimrc,~/.gitconfig,\
+~/.gitignore,~/.githelpers,~/.Xresources,~/.conkyrc,~/.aliases}
 
 echo "Symlinking files"
 ln -s $cur_path/aliases ~/.aliases
