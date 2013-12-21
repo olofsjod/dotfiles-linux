@@ -1,4 +1,4 @@
-call pathogen#incubate()
+call pathogen#infect()
 call pathogen#helptags()
 colorscheme Tomorrow-Night
 set nocompatible                    " choose no compatibility with legacy vi
@@ -10,15 +10,15 @@ filetype plugin indent on           " load file type plugins + indentation
 
 "" Whitespace
 ""set nowrap                          " Vim får jättegärna byta rad... 
-""set tabstop=4 shiftwidth=4          " a tab is two spaces (or set this to 4)
+set tabstop=4 shiftwidth=4            " a tab is two spaces (or set this to 4)
 ""set expandtab                       " use spaces, not tabs
 set backspace=indent,eol,start      " backspace through everything in insert mode
 set nolist
 
 "Abbreviations
 :iabbrev @@     olof.sjodin@itforsk.se
-:iabbrev ccopy  Copyright 2012 Olof Sjödin, all rights reserved.
-:iabbrev ppython #!/usr/bin/env python <cr>#-*- coding: utf-8 -*-
+:iabbrev ccopy  Copyright 2013 Olof Sjödin, all rights reserved.
+:iabbrev ppython #!/usr/bin/env python3 <cr>#-*- coding: utf-8 -*-
 :iabbrev rruby  #!/usr/bin/env ruby <cr># encoding: utf-8
 
 "" Searching
