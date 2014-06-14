@@ -6,7 +6,4 @@ set columns=185
 set cursorline
 set anti
 
-au FocusLost * :wa              " Save on losing window focus
-set guifont=Monaco h:12 " Setting font
-
-
+set guifont="Source Code Pro Medium 10"
