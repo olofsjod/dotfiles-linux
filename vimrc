@@ -1,23 +1,34 @@
 call pathogen#infect()
 call pathogen#helptags()
-colorscheme Tomorrow-Night
 set nocompatible                    " choose no compatibility with legacy vi
 syntax enable
+if has('gui_running')
+    colorscheme solarized
+else
+    colorscheme bclear
+endif
+
 
 set encoding=utf-8
 set showcmd                         " display incomplete commands
 filetype plugin indent on           " load file type plugins + indentation
 
-"" Whitespace
-""set nowrap                          " Vim får jättegärna byta rad... 
-set tabstop=4 shiftwidth=4            " a tab is two spaces (or set this to 4)
-""set expandtab                       " use spaces, not tabs
+"" Tab specific option, hämtat från http://www.haskell.org/haskellwiki/Vim
+set tabstop=8   	" En tabb = 8 mellanslag
+set shiftwidth=4	" Indrag = 4 mellanslag
+set expandtab           " Mellanslag > Tabbar
+set softtabstop=4       " Slå in 4 mellansl. när tab är intryckt
+set smarttab		" Indrag ist. för tab i början av en rad
+set shiftround		" Avrunda mellanslag till närmsta shiftwidth multipel
+set nojoinspaces	" ALDRIG ALDRIG TABBAR
+
+
 set backspace=indent,eol,start      " backspace through everything in insert mode
 set nolist
 
 "Abbreviations
-:iabbrev @@     olof.sjodin@itforsk.se
-:iabbrev ccopy  Copyright 2013 Olof Sjödin, all rights reserved.
+:iabbrev @@     me@olofsjodin.se
+:iabbrev ccopy  Copyright 2014 Olof Sjödin, all rights reserved.
 :iabbrev ppython #!/usr/bin/env python3 <cr>#-*- coding: utf-8 -*-
 :iabbrev rruby  #!/usr/bin/env ruby <cr># encoding: utf-8
 
@@ -30,7 +41,6 @@ set smartcase                       " ... unless they contain at least one capit
 "" Mappings
 nmap <F8> :TagbarToggle<CR>         " mapping f8 to TagbarToggle
 nmap <F2> :NERDTreeToggle<CR>       " mapping f2 to NERDTreeToggle
-nmap <F3> :NumbersToggle<CR>        " mapping f3 to NumbersToggle
 noremap <F5> :GundoToggle<CR>       " mapping f5 to Gundo
 noremap <F9> :Gcommit<CR>           " mapping f9 to Gcommit
 noremap! jj <Esc>                   "<Esc> to jj
@@ -41,7 +51,7 @@ let mapleader = ","                 " setting leader to ,
 set laststatus=2                    " Always show the statusline
 
 " Enable fancy mode 
-""let g:Powerline_symbols = 'fancy'   " Powerline
+let g:Powerline_symbols = 'fancy'   " Powerline
 
 "SWAGG
 set number                           " setting line numbers
@@ -61,3 +71,22 @@ function! OpenChangedFiles()
   endfor
 endfunction
 command! OpenChangedFiles :call OpenChangedFiles()
+
+" Execute 'lnoremap x X' and 'lnoremap X x' for each letter a-z.
+for c in range(char2nr('A'), char2nr('Z'))
+  execute 'lnoremap ' . nr2char(c+32) . ' ' . nr2char(c)
+  execute 'lnoremap ' . nr2char(c) . ' ' . nr2char(c+32)
+endfor
+
+" Kill the capslock when leaving insert mode.
+autocmd InsertLeave * set iminsert=0
+
+" vim-indent-guides
+let g:indent_guides_auto_colors = 0
+autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd ctermbg=236
+autocmd VimEnter,Colorscheme * :hi IndentGuidesEven ctermbg=250
+"set ts=2 sw=2 et
+"let g:indent_guides_start_level = 2
+"
+set rtp+=$HOME/.local/lib/python3.4/site-packages/powerline/bindings/vim/
+
