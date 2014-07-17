@@ -27,6 +27,8 @@ ln -s $cur_path/conkyrc ~/.conkyrc
 ln -s $cur_path/Xresources ~/.Xresources
 ln -s $cur_path/git-completion.bash ~/.git-completion.bash
 
+curl -s https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash -o $cur_path/git-completion.bash
+
 echo "Installing plugins to vim"
 vim +PluginInstall +qall > /dev/null 2>&1
 
