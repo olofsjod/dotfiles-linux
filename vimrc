@@ -1,6 +1,33 @@
-call pathogen#infect()
-call pathogen#helptags()
+"" START Vundle
 set nocompatible                    " choose no compatibility with legacy vi
+filetype off
+
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+
+Plugin 'gmarik/Vundle.vim'
+
+"" START Plugin list
+Plugin 'majutsushi/tagbar'
+Plugin 'scrooloose/nerdcommenter'
+Plugin 'tpope/vim-fugitive'
+Plugin 'nathanaelkane/vim-indent-guides'
+Plugin 'tpope/vim-surround'
+Plugin 'altercation/vim-colors-solarized'
+"" END Plugin list
+
+call vundle#end()
+filetype plugin indent on
+"" END Vundle
+" Brief help
+" :PluginList          - list configured plugins
+" :PluginInstall(!)    - install (update) plugins
+" :PluginSearch(!) foo - search (or refresh cache first) for foo
+" :PluginClean(!)      - confirm (or auto-approve) removal of unused plugins
+"
+" see :h vundle for more details or wiki for FAQ
+" Put your non-Plugin stuff after this line
+
 syntax enable
 if has('gui_running')
     colorscheme solarized
@@ -11,7 +38,6 @@ endif
 
 set encoding=utf-8
 set showcmd                         " display incomplete commands
-filetype plugin indent on           " load file type plugins + indentation
 
 "" Tab specific option, hämtat från http://www.haskell.org/haskellwiki/Vim
 set tabstop=8   	" En tabb = 8 mellanslag

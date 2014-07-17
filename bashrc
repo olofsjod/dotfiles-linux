@@ -2,9 +2,8 @@
 [ -n "$XTERM_VERSION" ] && transset 0.8 -a >/dev/null
 
 source ~/.aliases
-source ~/git-completion.bash
+source ~/.git-completion.bash
 # Reset
-
 Color_Off='\e[0m'       # Text Reset
 
 # Regular Colors
@@ -84,4 +83,4 @@ On_IWhite='\e[0;107m'   # White
 # \d Datum
 # \A Tid
 
-PS1="\[$Green\]\u\[$Color_Off\] \[$Blue\]\w\[$Color_Off\] \[$Green\]\$\[$Color_Off\] "
+PS1="\[$Green\]\u\[$Color_Off\]\[$Blue\]@\h\[$Color_Off\]\[$Red\]:\[$Color_Off\]\[$Black\]\[$On_White\]\w\[$Color_Off\] \[$Green\]λ\[$Color_Off\] "
