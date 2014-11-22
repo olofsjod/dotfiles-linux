@@ -1,7 +1,6 @@
 "" START Vundle
 set nocompatible                    " choose no compatibility with legacy vi
 filetype off
-
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
@@ -14,6 +13,8 @@ Plugin 'tpope/vim-fugitive'
 Plugin 'nathanaelkane/vim-indent-guides'
 Plugin 'tpope/vim-surround'
 Plugin 'altercation/vim-colors-solarized'
+Plugin 'bling/vim-airline'
+""Plugin 'lervag/vim-latex'
 "" END Plugin list
 
 call vundle#end()
@@ -77,7 +78,7 @@ let mapleader = ","                 " setting leader to ,
 set laststatus=2                    " Always show the statusline
 
 " Enable fancy mode 
-let g:Powerline_symbols = 'fancy'   " Powerline
+" let g:Powerline_symbols = 'fancy'   " Powerline
 
 "SWAGG
 set number                           " setting line numbers
@@ -99,10 +100,10 @@ endfunction
 command! OpenChangedFiles :call OpenChangedFiles()
 
 " Execute 'lnoremap x X' and 'lnoremap X x' for each letter a-z.
-for c in range(char2nr('A'), char2nr('Z'))
-  execute 'lnoremap ' . nr2char(c+32) . ' ' . nr2char(c)
-  execute 'lnoremap ' . nr2char(c) . ' ' . nr2char(c+32)
-endfor
+"for c in range(char2nr('A'), char2nr('Z'))
+"  execute 'lnoremap ' . nr2char(c+32) . ' ' . nr2char(c)
+"  execute 'lnoremap ' . nr2char(c) . ' ' . nr2char(c+32)
+"endfor
 
 " Kill the capslock when leaving insert mode.
 autocmd InsertLeave * set iminsert=0
@@ -114,5 +115,8 @@ autocmd VimEnter,Colorscheme * :hi IndentGuidesEven ctermbg=250
 "set ts=2 sw=2 et
 "let g:indent_guides_start_level = 2
 "
-set rtp+=$HOME/.local/lib/python3.4/site-packages/powerline/bindings/vim/
 
+let g:airline_powerline_fonts=1
+set guifont=Source\ Code\ Pro\ for\ Powerline\ 10
+""set langmap='q,\\,w,.e,pr,yt,fy,gu,ci,ro,lp,/[,=],aa,os,ed,uf,ig,dh,hj,tk,nl,s\\;,-',\\;z,qx,jc,kv,xb,bn,mm,w\\,,v.,z/,[-,]=,\"Q,<W,>E,PR,YT,FY,GU,CI,RO,LP,?{,+},AA,OS,ED,UF,IG,DH,HJ,TK,NL,S:,_\",:Z,QX,JC,KV,XB,BN,MM,W<,V>,Z?
+""set langmap=åq,äw,öe,pr,yt,fy,gu,ci,ro,lp,aa,os,ed,uf,ig,dh,hj,tk,nl,s\\;,-',\\;z,qx,jc,kv,xb,bn,mm,w\\,,v.,z/,[-,]=,\"Q,<W,>E,PR,YT,FY,GU,CI,RO,LP,?{,+},AA,OS,ED,UF,IG,DH,HJ,TK,NL,S:,_\",:Z,QX,JC,KV,XB,BN,MM,W<,V>,Z?

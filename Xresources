@@ -1,5 +1,4 @@
-xterm*faceName: anonymouspro:pixelsize=14
+Xterm*.font: xft:Source\ Code\ Pro:Regular:size=10
 xterm*utf8: true
-#xterm*loginShell: true
 XTerm*eightBitInput: false
 XTerm*metaSendsEscape: true

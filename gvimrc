@@ -6,4 +6,3 @@ set columns=185
 set cursorline
 set anti
 
-set guifont="Source Code Pro Medium 10"

@@ -1,4 +1,5 @@
 # .bashrc
+PATH=$PATH:~/bin
 [ -n "$XTERM_VERSION" ] && transset 0.8 -a >/dev/null
 
 source ~/.aliases
@@ -84,3 +85,4 @@ On_IWhite='\e[0;107m'   # White
 # \A Tid
 
 PS1="\[$Green\]\u\[$Color_Off\]\[$Blue\]@\h\[$Color_Off\]\[$Red\]:\[$Color_Off\]\[$Black\]\[$On_White\]\w\[$Color_Off\] \[$Green\]λ\[$Color_Off\] "
+
