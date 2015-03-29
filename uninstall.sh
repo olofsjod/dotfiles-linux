@@ -3,6 +3,6 @@
 echo "Uninstalling."
 
 rm -f {~/.bash_profile,~/.bashrc,~/.vimrc,~/.vim,~/.gvimrc,~/.gitconfig,\
-~/.gitignore,~/.githelpers,~/.Xresources,~/.conkyrc,~/.aliases,~/git-completion.bash}
+~/.gitignore,~/.githelpers,~/.Xresources,~/.conkyrc,~/.aliases,~/git-completion.bash, ~/.zshrc}
 
 echo "Done."

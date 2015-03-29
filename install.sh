@@ -11,7 +11,7 @@ mkdir -p $cur_path/vim/{colors,autoload}
 
 echo "Deleting the old symlinks"
 rm -f {~/.bash_profile,~/.bashrc,~/.vimrc,~/.vim,~/.gvimrc,~/.gitconfig,\
-~/.gitignore,~/.githelpers,~/.Xresources,~/.conkyrc,~/.aliases,~/.git-completion.bash}
+~/.gitignore,~/.githelpers,~/.Xresources,~/.conkyrc,~/.aliases,~/.git-completion.bash,~/.zshrc}
 
 echo "Symlinking files"
 ln -s $cur_path/aliases ~/.aliases
@@ -26,6 +26,7 @@ ln -s $cur_path/githelpers ~/.githelpers
 ln -s $cur_path/conkyrc ~/.conkyrc
 ln -s $cur_path/Xresources ~/.Xresources
 ln -s $cur_path/git-completion.bash ~/.git-completion.bash
+ln -s $cur_path/zshrc ~/.zshrc
 
 curl -s https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash -o $cur_path/git-completion.bash
 
