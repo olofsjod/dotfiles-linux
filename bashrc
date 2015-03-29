@@ -1,4 +1,5 @@
 # .bashrc
+shopt -s histappend
 PATH=$PATH:~/bin
 [ -n "$XTERM_VERSION" ] && transset 0.8 -a >/dev/null
 
