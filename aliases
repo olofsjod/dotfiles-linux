@@ -1,8 +1,8 @@
-#!/bin/bash
-# Aliases - by medik
-# ==================
+###########
+# Aliases #
+###########
 
-# list file
+# ls commands
 alias l="ls -lhF --group-directories-first --color"
 alias ll="l -L"
 alias lll="ls -lhF --group-directories-first | less"
@@ -12,7 +12,9 @@ alias la="ls -lAhFd --group-directories-first --color .[^.]*"
 alias df="df -hT"
 alias monitor_off="xset dpms force off"
 alias latex="texi2pdf main.tex; evince main.pdf"
+alias psgrep="ps aux | grep"
 
 # Insurance
-alias rm="trash"
+#alias rm="trash" TODO: use it when it is available
 alias httpserver="python3 -m http.server"
+
