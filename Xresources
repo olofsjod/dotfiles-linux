@@ -1,4 +1,21 @@
-Xterm*.font: xft:Source\ Code\ Pro:Regular:size=10
-xterm*utf8: true
-XTerm*eightBitInput: false
-XTerm*metaSendsEscape: true
+! XTerm failed config
+UXterm*faceName: Source\ Code\ Pro:Regular:size=12
+UXterm*utf8: true
+UXTerm*eightBitInput: false
+UXTerm*metaSendsEscape: true
+UXTerm*loginShell: true
+
+! URxvt config 
+URxvt.font: xft:Source\ Code\ Pro\ for\ Powerline:Regular:size=10
+URxvt*termName: screen-256color
+URxvt*scrollBar: false
+URxvt*fading: 30
+URxvt*loginShell: true
+URxvt*background: Black
+URxvt*foreground: White
+URxvt*visualBell: true
+URxvt*colorUL: yellow
+URxvt*saveLines: 0
+URxvt*transparent: true
+URxvt*tintColor: yellow
+URxvt*shading:20
