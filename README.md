@@ -1,15 +1,21 @@
 mediks dotfiles
 ---------------
 
-This is my dotfiles and this is how I like it. If you want to use it 
-or modifying it as your own; then feel free to do so. Happy programming!
+This repo is a collection of my dotfiles that I want to share (actually no, I just backup it here).
+Let it inspire you or fork it. 
 
 Install
 -------
-Install it by writing
+
+You can install my dotfiles by running the following command:
+
 ./install.sh
+
+However, it will remove you dotfiles in your homedirectory (will fix this soon). Never do this as root. 
 
 Uninstall
 ---------
-Uninstall by writing in the dotfiles directory
-./uninstall.sh
+
+Uninstallation is easy, run the command ./uninstall.sh and it 
+should remove all symlinks to the dotfiles.
+
