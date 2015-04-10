@@ -32,6 +32,7 @@ filetype plugin indent on
 syntax enable
 if has('gui_running')
     colorscheme solarized
+    let g:airline_powerline_fonts=1
 else
     colorscheme bclear
 endif
@@ -55,7 +56,7 @@ set nolist
 
 "Abbreviations
 :iabbrev @@     me@olofsjodin.se
-:iabbrev ccopy  Copyright 2014 Olof Sjödin, all rights reserved.
+:iabbrev ccopy  Copyright 2015 Olof Sjödin, all rights reserved.
 :iabbrev ppython #!/usr/bin/env python3 <cr>#-*- coding: utf-8 -*-
 :iabbrev rruby  #!/usr/bin/env ruby <cr># encoding: utf-8
 
@@ -116,7 +117,6 @@ autocmd VimEnter,Colorscheme * :hi IndentGuidesEven ctermbg=250
 "let g:indent_guides_start_level = 2
 "
 
-let g:airline_powerline_fonts=1
 set guifont=Source\ Code\ Pro\ for\ Powerline\ 10
 ""set langmap='q,\\,w,.e,pr,yt,fy,gu,ci,ro,lp,/[,=],aa,os,ed,uf,ig,dh,hj,tk,nl,s\\;,-',\\;z,qx,jc,kv,xb,bn,mm,w\\,,v.,z/,[-,]=,\"Q,<W,>E,PR,YT,FY,GU,CI,RO,LP,?{,+},AA,OS,ED,UF,IG,DH,HJ,TK,NL,S:,_\",:Z,QX,JC,KV,XB,BN,MM,W<,V>,Z?
 ""set langmap=åq,äw,öe,pr,yt,fy,gu,ci,ro,lp,aa,os,ed,uf,ig,dh,hj,tk,nl,s\\;,-',\\;z,qx,jc,kv,xb,bn,mm,w\\,,v.,z/,[-,]=,\"Q,<W,>E,PR,YT,FY,GU,CI,RO,LP,?{,+},AA,OS,ED,UF,IG,DH,HJ,TK,NL,S:,_\",:Z,QX,JC,KV,XB,BN,MM,W<,V>,Z?
