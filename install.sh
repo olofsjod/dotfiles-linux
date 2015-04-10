@@ -113,6 +113,12 @@ function install {
     vim +PluginInstall +qall > /dev/null 2>&1
 }
 
-install
-
-echo "All done."
+case "$1" in
+    install)
+        install;;
+    uninstall)
+        uninstall;;
+    *)
+        echo $"Usage: $0 {install|uninstall}"
+        exit 1
+esac
