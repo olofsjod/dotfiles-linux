@@ -21,7 +21,7 @@ It's not that complicated to add a dotfile on your own. Put the file (without a 
 
 ###Example
 ```
-mv ~/.foo bar/dotfiles/
+mv ~/.foo bar/dotfiles/foo
 sed -i -e 's%declare -a dotfiles=\(.*\)".*$%declare -a dotfiles=\1" "foo")%' bar/dotfiles/setup.sh
 cd bar/dotfiles
 ./setup.sh install
