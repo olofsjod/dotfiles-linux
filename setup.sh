@@ -68,6 +68,13 @@ function rmlink {
     f="$HOME/.$1"
     if [[ -h $f ]]; then
         rm -v $f
+        # check if a backup exist
+        backup="$f"
+        backup+=".bak"
+        if [[ -e $backup ]]; then
+            echo "Reverting $f to backup"
+            mv -v $backup $f
+        fi
     fi
 }
 
