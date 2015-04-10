@@ -28,8 +28,6 @@ echo "Copyright (C) 2015  Olof Sjödin"
 echo "This program comes with ABSOLUTELY NO WARRANTY."
 echo -e "This is free software, and you are welcome to redistribute it under certain conditions.\n"
 
-cur_path=`pwd`
-
 function ask {
     while true; do read yn
         case $yn in
@@ -42,7 +40,7 @@ function ask {
 
 function addlink {
     echo "Adding link to $1"
-    t="$cur_path/$1"
+    t="$PWD/$1"
     f="$HOME/.$1"
     if [[ ! -h $f ]]; then
         if [[ -e $f || -d $f ]]; then
@@ -56,7 +54,7 @@ function addlink {
 }
 
 function rmlink {
-    t="$cur_path/$1"
+    t="$PWD/$1"
     f="$HOME/.$1"
     if [[ -h $f ]]; then
         rm -v $f
@@ -87,13 +85,13 @@ function uninstall {
 
 function install {
     echo "Running install script"
-    mkdir -p $cur_path/vim/{colors,autoload}
+    mkdir -p $PWD/vim/{colors,autoload}
 
     echo "Initializing git submodules"
     git submodule init
     git submodule update
 
-    curl -s https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash -o $cur_path/git-completion.bash
+    curl -s https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash -o $PWD/git-completion.bash
 
     addlink bash_profile
     addlink bashrc
