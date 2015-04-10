@@ -28,6 +28,8 @@ echo "Copyright (C) 2015  Olof Sjödin"
 echo "This program comes with ABSOLUTELY NO WARRANTY."
 echo -e "This is free software, and you are welcome to redistribute it under certain conditions.\n"
 
+declare -a dotfiles=("bash_profile" "bashrc" "vimrc" "vim" "gvimrc" "gitconfig" "gitignore" "githelpers" "Xresources" "conkyrc" "aliases" "git-completion.bash" "zshrc")
+
 function ask {
     while true; do read yn
         case $yn in
@@ -63,24 +65,14 @@ function rmlink {
 
 function uninstall {
     echo "Running uninstall script"
-    echo "Will try to remove any links that are in $HOME"
+    echo "Will try to remove any links (to dotfiles that this program provides) that are in $HOME"
     echo "Are you sure? (y/N)"
 
     ask
 
-    rmlink bash_profile
-    rmlink bashrc
-    rmlink vimrc
-    rmlink vim
-    rmlink gvimrc
-    rmlink gitconfig
-    rmlink gitignore
-    rmlink githelpers
-    rmlink Xresources
-    rmlink conkyrc
-    rmlink aliases
-    rmlink git-completion.bash
-    rmlink zshrc
+    for i in "${dotfiles[@]}"; do
+        rmlink $i
+    done
 }
 
 function install {
@@ -93,19 +85,9 @@ function install {
 
     curl -s https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash -o $PWD/git-completion.bash
 
-    addlink bash_profile
-    addlink bashrc
-    addlink vimrc
-    addlink vim
-    addlink gvimrc
-    addlink gitconfig
-    addlink gitignore
-    addlink githelpers
-    addlink Xresources
-    addlink conkyrc
-    addlink aliases
-    addlink git-completion.bash
-    addlink zshrc
+    for i in "${dotfiles[@]}"; do
+        addlink $i
+    done
 
     echo "Installing silently plugins to vim"
     vim +PluginInstall +qall > /dev/null 2>&1
