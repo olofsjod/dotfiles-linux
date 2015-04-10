@@ -28,7 +28,7 @@ echo "Copyright (C) 2015  Olof Sjödin"
 echo "This program comes with ABSOLUTELY NO WARRANTY."
 echo -e "This is free software, and you are welcome to redistribute it under certain conditions.\n"
 
-declare -a dotfiles=("bash_profile" "bashrc" "vimrc" "vim" "gvimrc" "gitconfig" "gitignore" "githelpers" "Xresources" "conkyrc" "aliases" "git-completion.bash" "zshrc" "zprofile" "zshenv" "zlogin" "zlogout" "i3/config")
+declare -a dotfiles=("bash_profile" "bashrc" "vimrc" "vim" "gvimrc" "gitconfig" "gitignore" "githelpers" "Xresources" "conkyrc" "aliases" "git-completion.bash" "zshrc" "zprofile" "zshenv" "zlogin" "zlogout" "i3/config" "i3status.conf")
 
 function autocreatedir {
 result=`echo $1 | sed -e 's%\(.*\)/.*$%\1%'`
