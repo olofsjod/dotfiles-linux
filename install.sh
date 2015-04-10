@@ -30,6 +30,16 @@ echo -e "This is free software, and you are welcome to redistribute it under cer
 
 cur_path=`pwd`
 
+function ask {
+    while true; do read yn
+        case $yn in
+            [Yy]* ) break;;
+            [Nn]* ) echo -e "Aborting.\n"; exit;;
+            * ) echo "Please answer yes or no.";;
+        esac
+    done
+}
+
 function addlink {
     echo "Adding link to $1"
     t="$cur_path/$1"
@@ -57,6 +67,8 @@ function uninstall {
     echo "Running uninstall script"
     echo "Will try to remove any links that are in $HOME"
     echo "Are you sure? (y/N)"
+
+    ask
 
     rmlink bash_profile
     rmlink bashrc
@@ -101,5 +113,6 @@ function install {
     vim +PluginInstall +qall > /dev/null 2>&1
 }
 
+install
 
 echo "All done."
