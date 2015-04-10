@@ -18,6 +18,7 @@ The program will not overwrite your dotfiles, if you have existing dotfiles then
 Usage
 -----
 It's not that complicated to add a dotfile on your own. Put the file (without a dot) in the same folder as setup.sh and add the name of the file in the array dotfiles who is in the setup.sh script. You can see the pattern by looking for how I added my other dotfiles.
+And lastly rerun ./setup.sh install.
 
 ###Example
 ```
