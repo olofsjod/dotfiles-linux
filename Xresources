@@ -6,7 +6,8 @@ UXTerm*metaSendsEscape: true
 UXTerm*loginShell: true
 
 ! URxvt config 
-URxvt.font: xft:Source\ Code\ Pro\ for\ Powerline:Regular:size=10
+! URxvt.font: xft:Source\ Code\ Pro\ for\ Powerline:Regular:size=10
+URxvt.font: xft:Tewi:Regular:size=12
 URxvt*termName: screen-256color
 URxvt*scrollBar: false
 URxvt*fading: 30
@@ -15,7 +16,11 @@ URxvt*background: Black
 URxvt*foreground: White
 URxvt*visualBell: true
 URxvt*colorUL: yellow
-URxvt*saveLines: 0
+URxvt*saveLines: 10000
 URxvt*transparent: true
 URxvt*tintColor: yellow
 URxvt*shading:20
+URxvt*iso14755: false
+URxvt*iso14755_52: false
+URxvt*print-pipe: "cat > /dev/null"
+Rxvt*print-pipe: "cat > /dev/null"
