@@ -1,0 +1,11 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhist_cnt =9
+let g:netrw_dirhist_1='/home/medik/dev/codebase/the-auto-fig-checker'
+let g:netrw_dirhist_2='/home/medik/dev/codebase'
+let g:netrw_dirhist_3='/home/medik/dev/codebase/the-auto-fig-checker'
+let g:netrw_dirhist_4='/home/medik/.config/mopidy'
+let g:netrw_dirhist_5='/home/medik/.config/mopidy/spotify'
+let g:netrw_dirhist_6='/home/medik/.config/mopidy/spotify/Users'
+let g:netrw_dirhist_7='/home/medik/.config/mopidy/spotify'
+let g:netrw_dirhist_8='/home/medik/.config/mopidy'
+let g:netrw_dirhist_9='/home/medik/dev/dotfiles'
