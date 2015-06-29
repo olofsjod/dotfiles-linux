@@ -28,6 +28,7 @@ Plugin 'altercation/vim-colors-solarized'
 Plugin 'bling/vim-airline'
 Plugin 'scrooloose/nerdtree'
 Plugin 'sjl/gundo.vim'
+Plugin 'klen/python-mode'
 ""Plugin 'lervag/vim-latex'
 "" END Plugin list
 
@@ -50,16 +51,19 @@ set encoding=utf-8
 set showcmd             " display incomplete commands
 
 "" Tab specific option, inspired from http://www.haskell.org/haskellwiki/Vim
+" PEP 8: https://www.python.org/dev/peps/pep-0008/
+set textwidth=79
 set tabstop=8   	" sets one tab to 8 spaces
 set expandtab           " will use spaces instead of tab
 set shiftwidth=4	" sets indent to 4 spaces
-set softtabstop=8       " 
+set softtabstop=4       " 
 set smarttab		" sets tab to the value of shiftwidth in beginning of a line
 set shiftround		" will align indent to the closest multiple of shiftwidth
+set autoindent          " align the new line indent with the previous line
 set nojoinspaces	" don't add spaces when joining lines
 
 
-set backspace=indent,eol,start      " backspace through everything in insert mode
+set backspace=indent,eol,start      " backspace through everything in insert mode 
 set nolist
 
 "" Searching
@@ -113,3 +117,7 @@ autocmd VimEnter,Colorscheme * :hi IndentGuidesEven ctermbg=250
 "
 
 set guifont=Source\ Code\ Pro\ for\ Powerline\ 10
+
+" pymode
+
+let g:pymode_python = 'python3'

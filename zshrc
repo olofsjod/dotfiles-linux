@@ -2,7 +2,7 @@
 
 autoload -Uz promptinit
 promptinit
-prompt walters
+prompt redhat
 #PROMPT="%n@%B%M%b:%d %#"
 
 setopt histignorealldups sharehistory
@@ -65,3 +65,4 @@ setopt autopushd pushdsilent pushdtohome
 setopt nohashdirs
 setopt nohashcmds
 
+zstyle ":completion:*:commands" rehash 1
