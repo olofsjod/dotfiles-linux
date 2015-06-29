@@ -16,7 +16,14 @@ alias psgrep="ps aux | grep"
 alias Q="python3 ~medik/bin/resturangQ.py"
 alias dev="cd ~/dev"
 
+litter() {
+    if hash trash 2>/dev/null; then
+        trash "$@"
+    else
+        rm -v "$@"
+    fi
+}
 # Insurance
-#alias rm="trash" TODO: use it when it is available
+alias rm="litter" TODO: use it when it is available
 alias httpserver="python3 -m http.server"
 
