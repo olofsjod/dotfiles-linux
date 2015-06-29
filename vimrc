@@ -27,6 +27,7 @@ Plugin 'tpope/vim-surround'
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'bling/vim-airline'
 Plugin 'scrooloose/nerdtree'
+Plugin 'sjl/gundo.vim'
 ""Plugin 'lervag/vim-latex'
 "" END Plugin list
 
