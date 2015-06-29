@@ -65,4 +65,4 @@ setopt autopushd pushdsilent pushdtohome
 setopt nohashdirs
 setopt nohashcmds
 
-zstyle ":completion:*:commands" rehash 1
+#zstyle ":completion:*:commands" rehash 1
