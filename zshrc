@@ -42,7 +42,7 @@ source ~/.aliases
 
 setopt prompt_subst
 
-source ~/dev/zsh-git-prompt/zshrc.sh
+source $DOTFILES_HOME/zsh-git-prompt/zshrc.sh
 export RPROMPT='$(git_super_status)'
 
 DIRSTACKFILE="$HOME/.cache/zsh/dirs"
