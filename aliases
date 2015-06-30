@@ -24,6 +24,7 @@ litter() {
     fi
 }
 # Insurance
-alias rm="litter" TODO: use it when it is available
+#
+alias rm="litter" #TODO: use it when it is available
 alias httpserver="python3 -m http.server"
 
