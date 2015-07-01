@@ -2,7 +2,7 @@
 
   #########################
 ## dotfiles install script ##
-## by medik         v0.0.1 ##
+## by medik           v1.0 ##
   #########################
 
 # Wrote this as a practice to make good and robust
