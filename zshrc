@@ -66,3 +66,5 @@ setopt nohashdirs
 setopt nohashcmds
 
 #zstyle ":completion:*:commands" rehash 1
+
+export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
