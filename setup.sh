@@ -93,6 +93,7 @@ function uninstall {
 function install {
     echo "Running install script"
     mkdir -p $PWD/vim/{colors,autoload}
+    mkdir -p $HOME/.cache/zsh
 
     echo "Initializing git submodules"
     git submodule init
