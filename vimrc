@@ -28,8 +28,9 @@ Plugin 'altercation/vim-colors-solarized'
 Plugin 'bling/vim-airline'
 Plugin 'scrooloose/nerdtree'
 Plugin 'sjl/gundo.vim'
-Plugin 'klen/python-mode'
-""Plugin 'lervag/vim-latex'
+"Plugin 'klen/python-mode'
+Plugin 'lervag/vim-latex'
+Plugin 'LucHermitte/lh-vim-lib'
 "" END Plugin list
 
 call vundle#end()
@@ -116,7 +117,7 @@ autocmd VimEnter,Colorscheme * :hi IndentGuidesEven ctermbg=250
 "let g:indent_guides_start_level = 2
 "
 
-set guifont=Source\ Code\ Pro\ for\ Powerline\ 10
+set guifont=Source\ Code\ Pro
 
 " pymode
 
