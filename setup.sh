@@ -23,7 +23,7 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-echo -e "dotfiles installation script v0.0.1 \n"
+echo -e "dotfiles installation script v1.0 \n"
 echo "Copyright (C) 2015  Olof Sjödin"
 echo "This program comes with ABSOLUTELY NO WARRANTY."
 echo -e "This is free software, and you are welcome to redistribute it under certain conditions.\n"
