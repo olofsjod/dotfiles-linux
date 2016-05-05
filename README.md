@@ -1,41 +1,33 @@
-dotfiles
-========
+# dotfiles
 
-This repo is a collection of my dotfiles that I want to share (actually no, I just backup it here).
-Let it inspire you or fork it. Do not attempt to run this program as root (and you shouldn't do it either way).
+## Why this is needed
 
-Install
--------
+This is a repository of my prefered configuration files. It is easy to
+organize my dotfiles into categories. I don't need any fancy bootstrap script,
+and it fits my needs.
 
-You can install my dotfiles by running the following command:
+### Features
+* Easy organization of my dotfiles
+* Automatically downloads and installs Vundle + other plugins to Vim
+* It just works
 
-```
-./setup.sh install
-```
+## Installation
+Install it by cloning this repo into your preferred folder (don't move around
+the folder if you want this to still work...)
 
-The program will not overwrite your dotfiles, if you have existing dotfiles then it will backup it to {the-dotfile-in-question}.bak. 
+After you cloned this repo. Please run `./bootstrap.sh` to install all dotfiles
+kept in `confs/` and `/include`.  And that's it.
 
-Usage
------
-It's not that complicated to add a dotfile on your own. Put the file (without a dot) in the same folder as setup.sh and add the name of the file in the array dotfiles who is in the setup.sh script. You can see the pattern by looking for how I added my other dotfiles.
-And lastly rerun ./setup.sh install.
+## Usage (how the directory structure works)
+If I were in a coma and I forgot how to put all my configuration files: then
+this is for you. 
 
-###Example
-```
-mv ~/.foo bar/dotfiles/foo
-sed -i -e 's%declare -a dotfiles=\(.*\)".*$%declare -a dotfiles=\1" "foo")%' bar/dotfiles/setup.sh
-cd bar/dotfiles
-./setup.sh install
+It may be confusing at first, but all configuration files kept in `confs/` *must*
+be in a directory. In contrast to "dot-directory-files" should live in `include/`.
+Please look at my current directory structure if this seems confusing.
 
-```
-
+## Licence
+[Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA
+4.0)](https://creativecommons.org/licenses/by-nc-sa/4.0/)
 
 
-Uninstall
----------
-
-Uninstallation is easy, run the command 
-```
-./setup.sh uninstall
-```
-and it should remove all symlinks to the dotfiles.
