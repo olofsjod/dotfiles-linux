@@ -1,0 +1,9 @@
+# .bash_profile
+# -------------
+#
+# The personal initialization file, executed for login shells
+#
+# Run .bashrc 
+#
+
+[[ -r ~/.bashrc ]] && . ~/.bashrc
