@@ -111,14 +111,18 @@ function gitinit {
 }
 
 function fixvim {
-    mkdir -p $HOME/.vim/{colors,autoload}
     echo "Installing silently plugins to vim (try to hit enter if not
     responding)"
-    vim +PluginInstall +qall > /dev/null 2>&1
+
+    
+    mkdir -p $HOME/.vim/{colors,autoload,bundle}
+    git clone https://github.com/VundleVim/Vundle.vim.git \
+    ~/.vim/bundle/Vundle.vim
+    vim +PluginInstall +qall 
 }
 
 function install {
-    echo "Running install script"
+    echo "Bootstraping..."
     mkdir -p $HOME/.cache/zsh
 
     gitinit
