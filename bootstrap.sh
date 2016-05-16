@@ -15,6 +15,7 @@ function cleanlinks {
 }
 
 function createfolderlinks {
+    mkdir .links
     for d in include/*/; do
         newD=` echo $d | sed 's/^.*\/\(.*\)\/$/\1/'`
         ln -s `pwd`/$d .links/$newD
