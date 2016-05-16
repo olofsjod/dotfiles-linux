@@ -9,6 +9,10 @@
 # Wrote this as a practice to make good and robust
 # bash scripts.
 
+function cleanall {
+    cleanlinks
+    python3 cleaning.py
+}
 
 function cleanlinks {
     rm -r .links/*
@@ -128,7 +132,7 @@ function install {
 
     gitinit
 
-    cleanlinks
+    cleanall
 
     createfolderlinks
     createlinksfromfolders
