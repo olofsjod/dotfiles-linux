@@ -13,7 +13,7 @@ and it fits my needs.
 
 ## Installation
 Install it by cloning this repo into your preferred folder (don't move around
-the folder if you want this to still work...)
+the folder if you want this to work...)
 
 After you cloned this repo. Please run `./bootstrap.sh` to install all dotfiles
 kept in `confs/` and `/include`.  And that's it.
