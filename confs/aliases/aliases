@@ -1,0 +1,33 @@
+##
+# Aliases 
+
+# ls commands
+alias l="echo "`pwd`:"; ls -hF --group-directories-first --color"
+alias ll="ls -lhF --group-directories-first --color"
+alias lll="ls -lhF --group-directories-first | less"
+alias la="ls -lAhFd --group-directories-first --color .[^.]*"
+
+# Etc
+alias df="df -hT"
+alias monitor_off="xset dpms force off"
+alias latex="texi2pdf main.tex; evince main.pdf"
+alias psgrep="ps aux | grep"
+
+alias fontupdate="sudo fc-cache -fv"
+alias webserver="python3 -m http.server"
+
+# Insurance
+alias rm="litter"
+
+
+##
+# Functions
+
+litter() {
+    if hash trash 2>/dev/null; then
+        trash "$@"
+    else
+        echo "trash-cli not found; using rm"
+        rm -v "$@"
+    fi
+}
