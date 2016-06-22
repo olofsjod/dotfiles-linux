@@ -18,13 +18,11 @@ the folder if you want this to work...)
 After you cloned this repo. Please run `./bootstrap.sh` to install all dotfiles
 kept in `confs/` and `/include`.  And that's it.
 
-## Usage (how the directory structure works)
-If I were in a coma and I forgot how to put all my configuration files: then
-this is for you. 
-
-It may be confusing at first, but all configuration files kept in `confs/` *must*
-be in a directory. In contrast to "dot-directory-files" should live in `include/`.
-Please look at my current directory structure if this seems confusing.
+## Usage
+There are two folders: `confs/` and `include/`. In `confs/` you can organize your
+single textfiles that should be in $HOME. However, this script won't search for
+folders in there. This is the reason why `include/` come in handy. Drop those 
+folders into `include/`.
 
 ## Licence
 [Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA
