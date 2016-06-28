@@ -2,8 +2,8 @@
 # Aliases 
 
 # ls commands
-alias l="echo "`pwd`:"; ls -hF --group-directories-first --color"
-alias ll="ls -lhF --group-directories-first --color"
+alias l="pwd; ls -hF --group-directories-first --color -X"
+alias ll="ls -lhF --group-directories-first --color -X"
 alias lll="ls -lhF --group-directories-first | less"
 alias la="ls -lAhFd --group-directories-first --color .[^.]*"
 
@@ -17,7 +17,7 @@ alias fontupdate="sudo fc-cache -fv"
 alias webserver="python3 -m http.server"
 
 # Insurance
-alias rm="litter"
+alias remove="litter"
 
 
 ##
