@@ -36,8 +36,9 @@ def removeSymlinks(symlinks):
         os.unlink(f.path)
             
 def main():
+    thisFolder = os.getcwd()
     symlinks = getSymlinksFromHome()
-    filteredSymlinks = filterSymlinks('/home/medik/dev/dotfiles', symlinks)
+    filteredSymlinks = filterSymlinks(thisFolder, symlinks)
     removeSymlinks(filteredSymlinks)
 
 main()
