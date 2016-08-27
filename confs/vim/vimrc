@@ -31,6 +31,7 @@ Plugin 'sjl/gundo.vim'
 "Plugin 'klen/python-mode'
 Plugin 'lervag/vim-latex'
 Plugin 'LucHermitte/lh-vim-lib'
+Plugin 'fatih/vim-go'
 "" END Plugin list
 
 call vundle#end()
@@ -44,7 +45,7 @@ if has('gui_running')
     colorscheme solarized
     let g:airline_powerline_fonts=1
 else
-    colorscheme desert
+    colorscheme default
 endif
 
 
