@@ -1,6 +1,7 @@
 [user]
 	name = Olof Sjödin
 	email = me@olofsjodin.se
+	signingkey = me@olofsjodin.se
 
 [github]
 	user = medik
