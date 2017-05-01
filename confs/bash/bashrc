@@ -1,14 +1,26 @@
-shopt -s histappend
+ ##
+# .bashrc
+# -------
+# 
+# written by the hardworking, melancholic boy. enjoy
+
+ ##
+# Settings related to history
+
+shopt -s histappend  # keep history in other shells if having multiple bash sessions
+
+HISTSIZE=100000000000 # makes the bash history BIG
+HISTFILESIZE=1000000000000
+
+ ##
+# GoLang
+
 GOROOT=$HOME/go
 
  ##
 # PATH
 
 PATH=/home/medik/bin/anaconda3/bin:/opt/jdk8/bin:~/bin:$GOROOT/bin:$PATH
-#PATH=/opt/jdk8/bin:~/bin:$GOROOT/bin:$PATH
-PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
-
-[ -n "$XTERM_VERSION" ] && transset 0.8 -a >/dev/null
 
 source ~/.aliases
 source ~/.git-completion.bash
@@ -16,20 +28,14 @@ source ~/.git-completion.bash
  ##
 # Prompt
 
-# \u username
-# \h hostname
-# \$ promptchar {$,#}
-# \d Datum
-# \A Tid
-
-#PS1="\[$Green\]\u\[$Color_Off\]\[$Blue\]@\h\[$Color_Off\]\[$Red\]:\[$Color_Off\]\[$Black\]\[$On_White\]\w\[$Color_Off\] \[$Green\]λ\[$Color_Off\] "
 PS1="[\u@\h \W $] "
 
  ##
 # Unlimited bashhistory
+
 HISTSIZE=-1
 HISTFILESIZE=-1
 
 
 
-. /home/medik/torch/install/bin/torch-activate
+
