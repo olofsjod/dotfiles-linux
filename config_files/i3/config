@@ -6,7 +6,7 @@
 set $mod Mod4
 
 #font pango:Source Code Pro 8
-font pango:Misc Tamsyn 12
+font pango:xos4 Terminus Regular 12
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
@@ -75,28 +75,36 @@ bindsym $mod+a focus parent
 #bindsym $mod+d focus child
 
 # switch to workspace
-bindsym $mod+1 workspace 1
-bindsym $mod+2 workspace 2
-bindsym $mod+3 workspace 3
+bindsym $mod+1 workspace 1:www
+bindsym $mod+2 workspace 2:term
+bindsym $mod+3 workspace 3:emacs
 bindsym $mod+4 workspace 4
 bindsym $mod+5 workspace 5
 bindsym $mod+6 workspace 6
 bindsym $mod+7 workspace 7
-bindsym $mod+8 workspace 8
-bindsym $mod+9 workspace 9
-bindsym $mod+0 workspace 10
+bindsym $mod+8 workspace 8:steam
+bindsym $mod+9 workspace 9:vlc
+bindsym $mod+0 workspace 10:spotify
 
 # move focused container to workspace
-bindsym $mod+Shift+1 move container to workspace 1
-bindsym $mod+Shift+2 move container to workspace 2
-bindsym $mod+Shift+3 move container to workspace 3
+bindsym $mod+Shift+1 move container to workspace 1:www
+bindsym $mod+Shift+2 move container to workspace 2:term
+bindsym $mod+Shift+3 move container to workspace 3:emacs
 bindsym $mod+Shift+4 move container to workspace 4
 bindsym $mod+Shift+5 move container to workspace 5
 bindsym $mod+Shift+6 move container to workspace 6
 bindsym $mod+Shift+7 move container to workspace 7
-bindsym $mod+Shift+8 move container to workspace 8
-bindsym $mod+Shift+9 move container to workspace 9
-bindsym $mod+Shift+0 move container to workspace 10
+bindsym $mod+Shift+8 move container to workspace 8:steam
+bindsym $mod+Shift+9 move container to workspace 9:vlc
+bindsym $mod+Shift+0 move container to workspace 10:spotify
+
+assign [class="Firefox"] 1:www
+assign [class="urxvt"] 2:term
+assign [class="Terminator"] 2:term
+assign [class="Emacs"] 3:emacs
+assign [class="Steam"] 8:steam
+assign [class="VLC"] 9:vlc
+assign [class="Spotify"] 10:spotify
 
 # reload the configuration file
 bindsym $mod+o reload
@@ -105,6 +113,8 @@ bindsym $mod+Shift+r restart
 # exit i3 (logs you out of your X session)
 bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
 
+
+bindsym $mod+x open
 # resize window (you can also use the mouse for that)
 mode "resize" {
         # These bindings trigger as soon as you enter the resize mode
@@ -135,15 +145,15 @@ bindsym $mod+r mode "resize"
 # finds out, if available)
 bar {
     colors {
-        background #111111
-        statusline #FFFFFF
-        separator  #666666
+        background #7F5F58
+        statusline #FFBDB1
+        separator  #FF7D64
 
-        # type
-        focused_workspace  #008fff #007fff #ffffff
-        active_workspace   #333333 #5f676a #ffffff
-        inactive_workspace #333333 #222222 #888888
-        urgent_workspace   #aa0000 #990000 #ffffff
+        # type             border  bg      text
+        focused_workspace  #FF7D64 #CC6450 #f7f7f7
+        active_workspace   #3b131f #59756d #f7f7f7
+        inactive_workspace #7F3F32 #7F5F58 #FFBDB1
+        urgent_workspace   #aa0000 #db2d20 #f7f7f7
     }
     position bottom
         status_command i3status
@@ -156,20 +166,29 @@ bindsym $mod+shift+x exec i3lock
 
 exec --no-startup-id nm-applet
 
+# Set custom svorak layout
+exec setxkbmap se-svorak-custom
+
+# Turn off Caps-Lock
+exec setxkbmap -option caps:none
+
 # Disable touchpad
 # exec xinput set-prop 11 "Device Enabled" 0
 
 # Sets background 
 exec sh ~/.fehbg
 
-# Warningsystem so the computer won't die out of battery unnoticed :P
-# exec python3 ~/bin/warningsystem.py
-
-# Dropbox
+# Autostart
 exec dropbox start
+exec emacs
+exec steam
+exec firefox
+exec terminator
 
-# Locks computer after 1 minute
-exec xautolock -time 1 -locker i3lock
+exec dunst
+
+# Locks computer after 30 minute
+exec xautolock -time 30 -locker i3lock
 
 # Nvidia
 exec nvidia-settings --assign CurrentMetaMode="nvidia-auto-select +0+0 { ForceCompositionPipeline = On }"
