@@ -106,6 +106,8 @@ assign [class="Steam"] 8:steam
 assign [class="VLC"] 9:vlc
 assign [class="Spotify"] 10:spotify
 
+for_window [class="Steam"] floating enable
+
 # reload the configuration file
 bindsym $mod+o reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
@@ -156,12 +158,13 @@ bar {
         urgent_workspace   #aa0000 #db2d20 #f7f7f7
     }
     position bottom
-        status_command i3status
+        status_command i3blocks
 }
 
 # bindsym $mod+shift+s exec i3lock -c 000000 && systemctl suspend
 
 # Specialare
+bindsym $mod+shift+w exec python3 kbd-layout-toggle.py --change-layout se-svorak-custom
 bindsym $mod+shift+x exec i3lock
 
 exec --no-startup-id nm-applet
@@ -184,11 +187,10 @@ exec emacs
 exec steam
 exec firefox
 exec terminator
-
 exec dunst
 
 # Locks computer after 30 minute
-exec xautolock -time 30 -locker i3lock
+# exec xautolock -time 30 -locker i3lock
 
 # Nvidia
 exec nvidia-settings --assign CurrentMetaMode="nvidia-auto-select +0+0 { ForceCompositionPipeline = On }"
