@@ -4,9 +4,15 @@
 
 # Using the windows button as master key
 set $mod Mod4
+set $WWW 1 
+set $CHAT 2 
+set $MEDIA 3  
+set $DOCS 4 
+set $DEV 6 
+set $TERM 5 
+set $GAME 7 
 
-font pango:xos4 Terminus 8
-#font pango:DejaVu Sans Book 16
+font pango:Misc Tamsyn, FontAwesome 10
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
@@ -56,6 +62,7 @@ bindsym $mod+v split v
 
 # enter fullscreen mode for the focused container
 bindsym $mod+shift+m fullscreen
+bindsym $mod+m exec python3 ~/Dev/kbd-layout-toggle/kbd-layout-toggle.py --toggle
 
 # change container layout (stacked, tabbed, toggle split)
 bindsym $mod+s layout stacking
@@ -75,46 +82,41 @@ bindsym $mod+a focus parent
 #bindsym $mod+d focus child
 
 # switch to workspace
-bindsym $mod+1 workspace 1:www
-bindsym $mod+2 workspace 2:chat
-bindsym $mod+3 workspace 3:media
-bindsym $mod+4 workspace 4:docs
-bindsym $mod+5 workspace 5:dev
-bindsym $mod+6 workspace 6
-bindsym $mod+7 workspace 7
-bindsym $mod+8 workspace 8:game
+bindsym $mod+1 workspace $WWW
+bindsym $mod+2 workspace $CHAT
+bindsym $mod+3 workspace $MEDIA
+bindsym $mod+4 workspace $DOCS
+bindsym $mod+5 workspace $TERM
+bindsym $mod+6 workspace $DEV
+bindsym $mod+7 workspace $GAME
+bindsym $mod+8 workspace 8
 bindsym $mod+9 workspace 9
 bindsym $mod+0 workspace 10
 
 # move focused container to workspace
-bindsym $mod+Shift+1 move container to workspace 1:www
-bindsym $mod+Shift+2 move container to workspace 2:chat
-bindsym $mod+Shift+3 move container to workspace 3:media
-bindsym $mod+Shift+4 move container to workspace 4:docs
-bindsym $mod+Shift+5 move container to workspace 5:dev
-bindsym $mod+Shift+6 move container to workspace 6
-bindsym $mod+Shift+7 move container to workspace 7
-bindsym $mod+Shift+8 move container to workspace 8:game
+bindsym $mod+Shift+1 move container to workspace $WWW
+bindsym $mod+Shift+2 move container to workspace $CHAT
+bindsym $mod+Shift+3 move container to workspace $MEDIA
+bindsym $mod+Shift+4 move container to workspace $DOCS
+bindsym $mod+Shift+5 move container to workspace $TERM
+bindsym $mod+Shift+6 move container to workspace $DEV
+bindsym $mod+Shift+7 move container to workspace $GAME
+bindsym $mod+Shift+8 move container to workspace 8
 bindsym $mod+Shift+9 move container to workspace 9
 bindsym $mod+Shift+0 move container to workspace 10
 
-assign [class="Firefox"] 1:www
+assign [class="Firefox"] $WWW
+assign [class="Chrome"] $WWW
 
-assign [class="Pidgin"] 2:chat
+assign [class="Pidgin"] $CHAT
+assign [class="Skype"] $CHAT
 
-assign [class="VLC"] 3:media
-assign [class="Spotify"] 3:media
-
-assign [class="Evince"] 4:docs
-
-assign [class="Emacs"] 5:dev
-assign [class="URxvt"] 5:dev
-
-assign [class="Steam"] 8:game
+assign [class="VLC"] $MEDIA
+assign [class="Steam"] $GAME
 
 
 for_window [class="Firefox"] floating enable
-for_window [class="URxvt"] floating enable
+for_window [class="URxvt" workspace="(?!8)"] floating enable
 for_window [class="Pidgin"] floating enable
 for_window [class="Steam"] floating enable
 
@@ -156,18 +158,34 @@ bindsym $mod+r mode "resize"
 
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
-bar {
-    colors {
-        background #D4C9D8
-        statusline #160005
-        separator  #7A6671
+set_from_resource $black       color8  #000000
+set_from_resource $darkblack   color0  #000000
+set_from_resource $darkred     color1  #000000
+set_from_resource $red         color9  #000000
+set_from_resource $darkgreen   color2  #000000
+set_from_resource $green       color10 #000000
+set_from_resource $darkyellow  color3  #000000
+set_from_resource $yellow      color11 #000000
+set_from_resource $darkblue    color4  #000000
+set_from_resource $blue        color12 #000000
+set_from_resource $darkmagenta color5  #000000
+set_from_resource $magenta     color13 #000000
+set_from_resource $darkcyan    color6  #000000
+set_from_resource $cyan        color14 #000000
+set_from_resource $white       color7  #000000
+set_from_resource $darkwhite   color15 #000000
 
-        # type             border  bg      text
-        focused_workspace  #493E3B #A998B5 #160005
-        active_workspace   #493E3B #59756d #f7f7f7
-        inactive_workspace #A998B5 #D4C9D8 #160005
-        urgent_workspace   #aa0000 #db2d20 #f7f7f7
-    }
+set $darkblack   #161824
+set $background  #101010
+
+# Window colors           border      background   text            indicator    child_border
+client.focused            $blue       $blue        $white          $darkblack  $darkblack
+client.focused_inactive   $darkblack  $darkblack   $white          $darkblack  $darkblack
+client.unfocused          $darkgreen  $darkgreen   $white          $darkblack  $darkblack
+client.urgent             $darkblack  $darkblack   $white          $darkblack  $darkblack
+
+bar {
+    tray_output primary
     position bottom
         status_command i3blocks
 }
@@ -194,6 +212,7 @@ exec sh ~/.fehbg
 exec dunst
 exec pasystray
 exec conky
+exec mpd
 exec dropbox start
 exec emacs --daemon
 
