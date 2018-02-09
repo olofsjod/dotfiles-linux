@@ -9,9 +9,6 @@
 
 shopt -s histappend  # keep history in other shells if having multiple bash sessions
 
-HISTSIZE=100000000000 # makes the bash history BIG
-HISTFILESIZE=1000000000000
-
  ##
 # GoLang
 
@@ -23,7 +20,6 @@ GOROOT=$HOME/go
 PATH=/home/medik/bin/anaconda3/bin:/opt/jdk8/bin:~/bin:$GOROOT/bin:$PATH
 
 source ~/.aliases
-source ~/.git-completion.bash
 
  ##
 # Prompt
@@ -37,5 +33,7 @@ HISTSIZE=-1
 HISTFILESIZE=-1
 
 
+ ##
+# Editor
 
-
+EDITOR="emacsclient -t"
