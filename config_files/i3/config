@@ -158,36 +158,46 @@ bindsym $mod+r mode "resize"
 
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
-set_from_resource $black       color8  #000000
-set_from_resource $darkblack   color0  #000000
-set_from_resource $darkred     color1  #000000
-set_from_resource $red         color9  #000000
-set_from_resource $darkgreen   color2  #000000
-set_from_resource $green       color10 #000000
-set_from_resource $darkyellow  color3  #000000
-set_from_resource $yellow      color11 #000000
-set_from_resource $darkblue    color4  #000000
-set_from_resource $blue        color12 #000000
-set_from_resource $darkmagenta color5  #000000
-set_from_resource $magenta     color13 #000000
-set_from_resource $darkcyan    color6  #000000
-set_from_resource $cyan        color14 #000000
-set_from_resource $white       color7  #000000
-set_from_resource $darkwhite   color15 #000000
-
-set $darkblack   #161824
-set $background  #101010
+set_from_resource $black       i3wm.color8  #000000
+set_from_resource $darkblack   i3wm.color0  #000000
+set_from_resource $darkred     i3wm.color1  #000000
+set_from_resource $red         i3wm.color9  #000000
+set_from_resource $darkgreen   i3wm.color2  #000000
+set_from_resource $green       i3wm.color10 #000000
+set_from_resource $darkyellow  i3wm.color3  #000000
+set_from_resource $yellow      i3wm.color11 #000000
+set_from_resource $darkblue    i3wm.color4  #000000
+set_from_resource $blue        i3wm.color12 #000000
+set_from_resource $darkmagenta i3wm.color5  #000000
+set_from_resource $magenta     i3wm.color13 #000000
+set_from_resource $darkcyan    i3wm.color6  #000000
+set_from_resource $cyan        i3wm.color14 #000000
+set_from_resource $white       i3wm.color7  #000000
+set_from_resource $darkwhite   i3wm.color15 #000000
 
 # Window colors           border      background   text            indicator    child_border
-client.focused            $blue       $blue        $white          $darkblack  $darkblack
+client.focused            $darkblue   $darkblue    $white          $darkblue   $darkblack
 client.focused_inactive   $darkblack  $darkblack   $white          $darkblack  $darkblack
-client.unfocused          $darkgreen  $darkgreen   $white          $darkblack  $darkblack
+client.unfocused          $darkblack  $darkblack   $white          $darkblack  $darkblack
 client.urgent             $darkblack  $darkblack   $white          $darkblack  $darkblack
 
+new_window normal 4 px
+
 bar {
-    tray_output primary
-    position bottom
-        status_command i3blocks
+    mode		dock
+    position 		top
+    status_command 	i3blocks
+    colors {
+    	   background $black
+ 	   statusline #33aaff
+	   
+	   # <colorclass>	<border>	<background>	<text>
+	   
+	   focused_workspace	$darkblue	$darkblue	$white
+ 	   active_workspace 	$darkblue 	$darkblue 	$white
+	   inactive_workspace 	$darkblack 	$darkblack 	$white
+ 	   urgent_workspace 	$darkred	$darkblack	$white
+    }
 }
 
 # bindsym $mod+shift+s exec i3lock -c 000000 && systemctl suspend
@@ -196,6 +206,7 @@ bar {
 #bindsym $mod+shift+w exec python3 kbd-layout-toggle.py --change-layout se-svorak-custom
 bindsym $mod+shift+x exec i3lock
 
+# Network manager
 exec --no-startup-id nm-applet
 
 # Set custom svorak layout
@@ -204,7 +215,7 @@ exec setxkbmap se-svorak-custom
 # Turn off Caps-Lock
 exec setxkbmap -option caps:none
 
-     # Disable touchpad
+# Disable touchpad
 # exec xinput set-prop 11 "Device Enabled" 0
 
 # Sets background 
@@ -214,10 +225,12 @@ exec pasystray
 exec conky
 exec mpd
 exec dropbox start
+exec nextcloud
 exec emacs --daemon
+exec redshift
 
 # Locks computer after 30 minute
-# exec xautolock -time 30 -locker i3lock
+exec xautolock -time 120 -locker i3lock
 
 # Nvidia
 exec nvidia-settings --assign CurrentMetaMode="nvidia-auto-select +0+0 { ForceCompositionPipeline = On }"
@@ -228,3 +241,4 @@ exec nvidia-settings --assign CurrentMetaMode="nvidia-auto-select +0+0 { ForceCo
 
 # No titlebar
 #new_window 1pixel
+focus_follows_mouse no

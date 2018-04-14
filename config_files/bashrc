@@ -37,3 +37,15 @@ HISTFILESIZE=-1
 # Editor
 
 EDITOR="emacsclient -t"
+
+ ##
+# Disable CTRL+S
+
+stty -ixon
+
+ ##
+# lsgrep
+
+function lsgrep {
+    ls -l | grep $1
+}
