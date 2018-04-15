@@ -2,7 +2,7 @@ import os
 import sys
 import shutil
 
-def doIt():
+def copy_config_files():
     # Copy all config files inside config_files to ~
 
     confdir = "config_files"
@@ -25,4 +25,7 @@ def doIt():
         except:
             print("Unexpected error:", sys.exc_info()[0])
 
-doIt()
+if __name__ == "__main__":
+    print("medik's install script as of 2018-04-14 for Fedora Linux")
+    copy_config_files()
+    
