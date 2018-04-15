@@ -1,6 +1,6 @@
 # i3 Config
 #
-# Olof Sjödin 2017
+# Copyright Olof Sjödin 2017-2018
 
 # Using the windows button as master key
 set $mod Mod4
@@ -16,6 +16,11 @@ font pango:Misc Tamsyn, FontAwesome 10
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
+
+# No titlebar
+#new_window 1pixel
+
+focus_follows_mouse no
 
 # start a terminal
 bindsym $mod+Return exec urxvt
@@ -200,45 +205,44 @@ bar {
     }
 }
 
-# bindsym $mod+shift+s exec i3lock -c 000000 && systemctl suspend
-
-# Specialare
-#bindsym $mod+shift+w exec python3 kbd-layout-toggle.py --change-layout se-svorak-custom
-bindsym $mod+shift+x exec i3lock
-
-# Network manager
-exec --no-startup-id nm-applet
-
-# Set custom svorak layout
+# Svorak
 exec setxkbmap se-svorak-custom
-
-# Turn off Caps-Lock
-exec setxkbmap -option caps:none
+exec setxkbmap -option caps:none # Turn off Caps-Lock
 
 # Disable touchpad
 # exec xinput set-prop 11 "Device Enabled" 0
 
-# Sets background 
-exec sh ~/.fehbg
-exec dunst
-exec pasystray
-exec conky
+ ## 
+# Autostart
+
+exec sh ~/.fehbg			# Sets background
+exec dunst				# Start notification daemon
+exec conky				
+exec pasystray				# Start PulseAudio systray
+exec --no-startup-id nm-applet		# Start Network Manager systray
+exec redshift	     			
+
 exec mpd
+
 exec dropbox start
-exec nextcloud
+#exec nextcloud
+
 exec emacs --daemon
-exec redshift
 
 # Locks computer after 30 minute
-exec xautolock -time 120 -locker i3lock
+exec xautolock -time 120 -locker i3lock -c 000000
 
 # Nvidia
-exec nvidia-settings --assign CurrentMetaMode="nvidia-auto-select +0+0 { ForceCompositionPipeline = On }"
+#exec nvidia-settings --assign CurrentMetaMode="nvidia-auto-select +0+0 { ForceCompositionPipeline = On }"
+
+ ##
+# Other bindings
+
+bindsym $mod+shift+x exec i3lock -c 000000
+
+# These binds the media keys to their respective action
 
 # bindsym XF86AudioRaiseVolume exec amixer -q set Master 2dB+ unmute
 # bindsym XF86AudioLowerVolume exec amixer -q set Master 2dB- unmute
 # bindsym XF86AudioMute exec amixer -q set Headphone toggle
 
-# No titlebar
-#new_window 1pixel
-focus_follows_mouse no
