@@ -20,11 +20,14 @@ def copy_config_files():
         dstname = os.path.join(dst, "." + n)
 
         try:
-            if os.path.isdir(srcname):
-                shutil.copytree(srcname, dstname)
+            if not os.path.isfile(dstname) and not os.path.isdir(dstname):
+                if os.path.isdir(srcname):
+                    shutil.copytree(srcname, dstname)
+                else:
+                    shutil.copy2(srcname, dstname)
             else:
-                shutil.copy2(srcname, dstname)
-
+                print("Skipping " + n)
+                
             #shutil.copystat(src, dst)
         except:
             print("Unexpected error:", sys.exc_info()[0])
