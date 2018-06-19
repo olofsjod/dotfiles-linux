@@ -1,0 +1,257 @@
+# i3 Config
+#
+# Copyright Olof Sjödin 2017-2018
+#
+# Licensed with GPL version 3
+
+# Using the windows button as master key
+set $mod Mod4
+set $WWW 1 
+set $CHAT 2 
+set $MEDIA 3  
+set $DOCS 4 
+set $DEV 6 
+set $TERM 5 
+set $GAME 7 
+
+#font pango:DejaVu sans, FontAwesome 10
+font pango:Tamzen, FontAwesome 12
+
+# Use Mouse+$mod to drag floating windows to their wanted position
+floating_modifier $mod
+
+# No titlebar
+#new_window 1pixel
+
+focus_follows_mouse no
+
+# start a terminal
+bindsym $mod+Return exec urxvt
+
+# kill focused window
+bindsym $mod+w kill
+
+# start dmenu (a program launcher)
+bindsym $mod+d exec "rofi -combi-modi window,drun -show combi -modi combi"
+# There also is the (new) i3-dmenu-desktop which only displays applications
+# shipping a .desktop file. It is a wrapper around dmenu, so you need that
+# installed.
+# bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
+
+# change focus
+bindsym $mod+b focus left
+bindsym $mod+n focus down
+bindsym $mod+p focus up
+bindsym $mod+f focus right
+
+# alternatively, you can use the cursor keys:
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+
+# move focused window
+bindsym $mod+Shift+b move left
+bindsym $mod+Shift+n move down
+bindsym $mod+Shift+p move up
+bindsym $mod+Shift+f move right
+
+# alternatively, you can use the cursor keys:
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+
+# split in horizontal orientation
+bindsym $mod+h split h
+
+# split in vertical orientation
+bindsym $mod+v split v
+
+# enter fullscreen mode for the focused container
+bindsym $mod+shift+m fullscreen
+bindsym $mod+m exec python3 ~/bin/kbd-layout-toggle.py --toggle
+
+# change container layout (stacked, tabbed, toggle split)
+bindsym $mod+s layout stacking
+bindsym $mod+t layout tabbed
+bindsym $mod+shift+s layout toggle split
+
+# toggle tiling / floating
+bindsym $mod+Shift+space floating toggle
+
+# change focus between tiling / floating windows
+bindsym $mod+space focus mode_toggle
+
+# focus the parent container
+bindsym $mod+shift+c focus parent
+
+# focus the child container
+bindsym $mod+c focus child
+
+# switch to workspace
+bindsym $mod+1 workspace $WWW
+bindsym $mod+2 workspace $CHAT
+bindsym $mod+3 workspace $MEDIA
+bindsym $mod+4 workspace $DOCS
+bindsym $mod+5 workspace $TERM
+bindsym $mod+6 workspace $DEV
+bindsym $mod+7 workspace $GAME
+bindsym $mod+8 workspace 8
+bindsym $mod+9 workspace 9
+bindsym $mod+0 workspace 10
+
+# move focused container to workspace
+bindsym $mod+Shift+1 move container to workspace $WWW
+bindsym $mod+Shift+2 move container to workspace $CHAT
+bindsym $mod+Shift+3 move container to workspace $MEDIA
+bindsym $mod+Shift+4 move container to workspace $DOCS
+bindsym $mod+Shift+5 move container to workspace $TERM
+bindsym $mod+Shift+6 move container to workspace $DEV
+bindsym $mod+Shift+7 move container to workspace $GAME
+bindsym $mod+Shift+8 move container to workspace 8
+bindsym $mod+Shift+9 move container to workspace 9
+bindsym $mod+Shift+0 move container to workspace 10
+
+assign [class="Firefox"] $WWW
+assign [class="Chrome"] $WWW
+
+assign [class="Pidgin"] $CHAT
+assign [class="Skype"] $CHAT
+
+assign [class="VLC"] $MEDIA
+assign [class="Steam"] $GAME
+
+
+#for_window [class="Firefox"] floating enable
+#for_window [class="URxvt" workspace="(?!8)"] floating enable
+#for_window [class="Pidgin"] floating enable
+for_window [class="Steam"] floating enable
+
+
+# reload the configuration file
+bindsym $mod+o reload
+# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
+bindsym $mod+Shift+r restart
+# exit i3 (logs you out of your X session)
+bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
+
+
+bindsym $mod+x open
+# resize window (you can also use the mouse for that)
+mode "resize" {
+        # These bindings trigger as soon as you enter the resize mode
+
+        # Pressing left will shrink the window’s width.
+        # Pressing right will grow the window’s width.
+        # Pressing up will shrink the window’s height.
+        # Pressing down will grow the window’s height.
+        bindsym b resize shrink width 10 px or 10 ppt
+        bindsym p resize grow height 10 px or 10 ppt
+        bindsym n resize shrink height 10 px or 10 ppt
+        bindsym f resize grow width 10 px or 10 ppt
+
+        # same bindings, but for the arrow keys
+        bindsym Left resize shrink width 10 px or 10 ppt
+        bindsym Down resize grow height 10 px or 10 ppt
+        bindsym Up resize shrink height 10 px or 10 ppt
+        bindsym Right resize grow width 10 px or 10 ppt
+
+        # back to normal: Enter or Escape
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+
+bindsym $mod+r mode "resize"
+
+# Start i3bar to display a workspace bar (plus the system information i3status
+# finds out, if available)
+set_from_resource $black       i3wm.color8  #000000
+set_from_resource $darkblack   i3wm.color0  #000000
+set_from_resource $darkred     i3wm.color1  #000000
+set_from_resource $red         i3wm.color9  #000000
+set_from_resource $darkgreen   i3wm.color2  #000000
+set_from_resource $green       i3wm.color10 #000000
+set_from_resource $darkyellow  i3wm.color3  #000000
+set_from_resource $yellow      i3wm.color11 #000000
+set_from_resource $darkblue    i3wm.color4  #000000
+set_from_resource $blue        i3wm.color12 #000000
+set_from_resource $darkmagenta i3wm.color5  #000000
+set_from_resource $magenta     i3wm.color13 #000000
+set_from_resource $darkcyan    i3wm.color6  #000000
+set_from_resource $cyan        i3wm.color14 #000000
+set_from_resource $white       i3wm.color7  #000000
+set_from_resource $darkwhite   i3wm.color15 #000000
+
+# Window colors           border      background   text            indicator    child_border
+client.focused            $darkblue   $darkblue    $white          $darkblue   $darkblack
+client.focused_inactive   $darkblack  $darkblack   $white          $darkblack  $darkblack
+client.unfocused          $darkblack  $darkblack   $white          $darkblack  $darkblack
+client.urgent             $darkblack  $darkblack   $white          $darkblack  $darkblack
+
+new_window normal 4 px
+
+bar {
+    mode		dock
+    position 		top
+    status_command 	i3blocks
+    tray_output		none
+    colors {
+    	   background $black
+ 	   statusline #33aaff
+	   
+	   # <colorclass>	<border>	<background>	<text>
+	   
+	   focused_workspace	$darkblue	$darkblue	$white
+ 	   active_workspace 	$darkblue 	$darkblue 	$white
+	   inactive_workspace 	$darkblack 	$darkblack 	$white
+ 	   urgent_workspace 	$darkred	$darkblack	$white
+    }
+}
+
+# Svorak
+exec setxkbmap se-svorak-custom
+exec setxkbmap -option caps:none # Turn off Caps-Lock
+
+# Disable touchpad
+# exec xinput set-prop 11 "Device Enabled" 0
+
+ ## 
+# Autostart
+exec compton
+exec sh ~/.fehbg			# Sets background
+exec dunst				# Start notification daemon
+#exec conky				
+exec pasystray				# Start PulseAudio systray
+exec --no-startup-id nm-applet		# Start Network Manager systray
+exec redshift	     			
+
+exec mpd
+
+exec dropbox start
+#exec nextcloud
+
+exec emacs --daemon
+
+# Locks computer after 30 minute
+exec xautolock -time 120 -locker i3lock -c 000000
+
+ ##
+# Other bindings
+
+bindsym $mod+shift+x exec i3lock -c 000000
+
+# These binds the media keys to their respective action
+
+bindsym XF86AudioRaiseVolume exec amixer -q set Master 5%+
+bindsym XF86AudioLowerVolume exec amixer -q set Master 5%-
+bindsym XF86AudioMute exec amixer -q set Master toggle
+bindsym XF86MonBrightnessUp exec xbacklight -inc 2
+bindsym XF86MonBrightnessDown exec xbacklight -dec 2
+bindsym --release Print exec scrot 'Screenshot %Y-%m-%d %H.%M.%S.png' -e 'mv "$f" ~/Dropbox/Screenshots/'
+bindsym --release Shift+Print exec scrot -s 'Screenshot %Y-%m-%d %H.%M.%S.png' -e 'mv "$f" ~/Dropbox/Screenshots/ && dropbox sharelink ~/Dropbox/Screenshots/$f | xclip -r && notify-send Screenshot "A sharable link to your screenshot is now available in your clipboard." '
+
+#  dropbox sharelink ~/Dropbox/Screenshots/$f | xclip -r && 
+
+# i3 gaps
+gaps inner 5
