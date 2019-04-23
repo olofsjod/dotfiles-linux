@@ -1,11 +1,66 @@
-# i3 Config
+# Olof's i3 config for KittyExpress
+# =================================
 #
-# Copyright Olof Sjödin 2017-2018
+# My i3 config on my laptop which is, for now, an XPS 13. Remember
+# that to be able to run this config you need additional dependencies.
 #
+# In the moment of writing the conditionally optional dependencies
+# are:
+#
+# - To use the media keys such as mute, raising/decreasing volume: amixer
+# - Changing brightness requires: xbacklight
+# - Status bar fonts: Tamzen and FontAwesome
+# - Status bar: bumblebee-status
+# - Program launcher: rofi
+# - kbd-layout-toggle.py (to change between dvorak and qwerty)
+# - ...and probably more (read this config)
+#
+# Thoughts about the organization of this config
+# ----------------------------------------------
+#
+# I've organized this configuration into seven parts which includes in
+# the order:
+#
+# 1. Global variables
+# 2. Fonts
+# 3. Bindings
+# 4. Rules for moving windows to their workspace
+# 5. Window rules (floating, tiling etc)
+# 6. Status bar
+# 7. Autostart
+#
+# The global variables includes the definitions of the names of each
+# workspace where the variable name reflect what the workspace. To
+# change the workspace key binding location you need to go to
+# "Bindings" and change the number it points to at "switch to
+# workspace" and "move focused container to workspace". While it is
+# not required it might be a good idea to change the number at "Global
+# variables" as well to avoid confusion. I would love make this change
+# easier to do, but as for now it is what and it is unlikely that I
+# will.  But if I would decide to do it then I would rename the
+# variables and make them independent on the type of workspace it
+# is. This is because you can't nest variables in ".i3/config".
+#
+# Happy hacking!
+#
+# Copyright Olof Sjödin <me@olofsjodin.se> 2017-2019
 # Licensed with GPL version 3
+
+
+## Set global variables
+#
+# WARNING: This MUST be set before the others as they use the
+# variables set here.
 
 # Using the windows button as master key
 set $mod Mod4
+
+# Set paths
+set $path_to_bumblebee ~/bumblebee-status/bumblebee-status
+set $path_to_kbd_layout_toggle ~/bin/kbd-layout-toggle.py
+set $path_to_scrot_screenshots ~/Nextcloud/Screenshots/
+
+# Set workspace names
 set $WWW 1 
 set $CHAT 2 
 set $MEDIA 3  
@@ -14,7 +69,13 @@ set $DEV 6 
 set $TERM 5 
 set $GAME 7 
 
-#font pango:DejaVu sans, FontAwesome 10
+## Set the font
+# 
+# Example:
+# font pango:DejaVu sans, FontAwesome 10
+#
+# DejaVu sans has higher priority than FontAwesome, both with the same
+# font size and it isn't possible to set font size per font.
 font pango:Tamzen, FontAwesome 12
 
 # Use Mouse+$mod to drag floating windows to their wanted position
@@ -25,18 +86,16 @@ floating_modifier $mod
 
 focus_follows_mouse no
 
+## Bindings
+
 # start a terminal
-bindsym $mod+Return exec urxvt
+bindsym $mod+Return exec gnome-terminal
 
 # kill focused window
 bindsym $mod+w kill
 
-# start dmenu (a program launcher)
-bindsym $mod+d exec "rofi -combi-modi window,drun -show combi -modi combi"
-# There also is the (new) i3-dmenu-desktop which only displays applications
-# shipping a .desktop file. It is a wrapper around dmenu, so you need that
-# installed.
-# bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
+# start rofi (THE program launcher)
+bindsym $mod+d exec "rofi -combi-modi window,drun,run -show combi -modi combi"
 
 # change focus
 bindsym $mod+b focus left
@@ -70,7 +129,7 @@ bindsym $mod+v split v
 
 # enter fullscreen mode for the focused container
 bindsym $mod+shift+m fullscreen
-bindsym $mod+m exec python3 ~/bin/kbd-layout-toggle.py --toggle
+bindsym $mod+m exec python3 $path_to_kbd_layout_toggle --toggle
 
 # change container layout (stacked, tabbed, toggle split)
 bindsym $mod+s layout stacking
@@ -113,31 +172,19 @@ bindsym $mod+Shift+8 move container to workspace 8
 bindsym $mod+Shift+9 move container to workspace 9
 bindsym $mod+Shift+0 move container to workspace 10
 
-assign [class="Firefox"] $WWW
-assign [class="Chrome"] $WWW
-
-assign [class="Pidgin"] $CHAT
-assign [class="Skype"] $CHAT
-
-assign [class="VLC"] $MEDIA
-assign [class="Steam"] $GAME
-
-
-#for_window [class="Firefox"] floating enable
-#for_window [class="URxvt" workspace="(?!8)"] floating enable
-#for_window [class="Pidgin"] floating enable
-for_window [class="Steam"] floating enable
 
 
 # reload the configuration file
 bindsym $mod+o reload
+
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+r restart
+
 # exit i3 (logs you out of your X session)
 bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
 
-
 bindsym $mod+x open
+
 # resize window (you can also use the mouse for that)
 mode "resize" {
         # These bindings trigger as soon as you enter the resize mode
@@ -164,94 +211,139 @@ mode "resize" {
 
 bindsym $mod+r mode "resize"
 
-# Start i3bar to display a workspace bar (plus the system information i3status
-# finds out, if available)
-set_from_resource $black       i3wm.color8  #000000
-set_from_resource $darkblack   i3wm.color0  #000000
-set_from_resource $darkred     i3wm.color1  #000000
-set_from_resource $red         i3wm.color9  #000000
-set_from_resource $darkgreen   i3wm.color2  #000000
-set_from_resource $green       i3wm.color10 #000000
-set_from_resource $darkyellow  i3wm.color3  #000000
-set_from_resource $yellow      i3wm.color11 #000000
-set_from_resource $darkblue    i3wm.color4  #000000
-set_from_resource $blue        i3wm.color12 #000000
-set_from_resource $darkmagenta i3wm.color5  #000000
-set_from_resource $magenta     i3wm.color13 #000000
-set_from_resource $darkcyan    i3wm.color6  #000000
-set_from_resource $cyan        i3wm.color14 #000000
-set_from_resource $white       i3wm.color7  #000000
-set_from_resource $darkwhite   i3wm.color15 #000000
-
-# Window colors           border      background   text            indicator    child_border
-client.focused            $darkblue   $darkblue    $white          $darkblue   $darkblack
-client.focused_inactive   $darkblack  $darkblack   $white          $darkblack  $darkblack
-client.unfocused          $darkblack  $darkblack   $white          $darkblack  $darkblack
-client.urgent             $darkblack  $darkblack   $white          $darkblack  $darkblack
-
-new_window normal 4 px
-
-bar {
-    mode		dock
-    position 		top
-    status_command 	i3blocks
-    tray_output		none
-    colors {
-    	   background $black
- 	   statusline #33aaff
-	   
-	   # <colorclass>	<border>	<background>	<text>
-	   
-	   focused_workspace	$darkblue	$darkblue	$white
- 	   active_workspace 	$darkblue 	$darkblue 	$white
-	   inactive_workspace 	$darkblack 	$darkblack 	$white
- 	   urgent_workspace 	$darkred	$darkblack	$white
-    }
-}
-
-# Svorak
-exec setxkbmap se-svorak-custom
-exec setxkbmap -option caps:none # Turn off Caps-Lock
-
-# Disable touchpad
-# exec xinput set-prop 11 "Device Enabled" 0
-
- ## 
-# Autostart
-exec compton
-exec sh ~/.fehbg			# Sets background
-exec dunst				# Start notification daemon
-#exec conky				
-exec pasystray				# Start PulseAudio systray
-exec --no-startup-id nm-applet		# Start Network Manager systray
-exec redshift	     			
-
-exec mpd
-
-exec dropbox start
-#exec nextcloud
-
-exec emacs --daemon
-
-# Locks computer after 30 minute
-exec xautolock -time 120 -locker i3lock -c 000000
-
- ##
-# Other bindings
-
 bindsym $mod+shift+x exec i3lock -c 000000
 
 # These binds the media keys to their respective action
 
 bindsym XF86AudioRaiseVolume exec amixer -q set Master 5%+
 bindsym XF86AudioLowerVolume exec amixer -q set Master 5%-
-bindsym XF86AudioMute exec amixer -q set Master toggle
-bindsym XF86MonBrightnessUp exec xbacklight -inc 2
-bindsym XF86MonBrightnessDown exec xbacklight -dec 2
-bindsym --release Print exec scrot 'Screenshot %Y-%m-%d %H.%M.%S.png' -e 'mv "$f" ~/Dropbox/Screenshots/'
-bindsym --release Shift+Print exec scrot -s 'Screenshot %Y-%m-%d %H.%M.%S.png' -e 'mv "$f" ~/Dropbox/Screenshots/ && dropbox sharelink ~/Dropbox/Screenshots/$f | xclip -r && notify-send Screenshot "A sharable link to your screenshot is now available in your clipboard." '
 
-#  dropbox sharelink ~/Dropbox/Screenshots/$f | xclip -r && 
+# fixme, muting master causing speaker to mute and hence can't be
+# unmuted using the same command again. (check amixer. what is
+# "auto-mute mode"?)
+bindsym XF86AudioMute exec amixer -q set Master toggle
+
+bindsym XF86MonBrightnessUp exec xbacklight -inc 10
+bindsym shift+XF86MonBrightnessUp exec xbacklight -inc 1
+
+bindsym XF86MonBrightnessDown exec xbacklight -dec 10
+bindsym shift+XF86MonBrightnessDown exec xbacklight -dec 1
+
+bindsym --release Print exec scrot 'Screenshot %Y-%m-%d %H.%M.%S.png' -e 'mv "$f" "$path_to_scrot_screenshots"'
+
+# fixme, change it to nextcloud
+# bindsym --release Shift+Print exec scrot -s 'Screenshot %Y-%m-%d %H.%M.%S.png' -e 'mv "$f" ~/Dropbox/Screenshots/ && dropbox sharelink ~/Dropbox/Screenshots/$f | xclip -r && notify-send Screenshot "A sharable link to your screenshot is now available in your clipboard." '
+
+# dropbox sharelink ~/Dropbox/Screenshots/$f | xclip -r && 
 
 # i3 gaps
-gaps inner 5
+#gaps inner 5
+
+bindsym button4 nop
+bindsym button5 nop
+
+## Organize applications by moving them to their workspaces
+
+# Web
+assign [class="Chrome"] $WWW
+assign [class="Firefox"] $WWW
+
+# Chat
+assign [class="Pidgin"] $CHAT
+assign [class="Riot"] $CHAT
+assign [class="Signal"] $CHAT
+assign [class="Skype"] $CHAT
+
+# Docs
+assign [class="Libreoffice"] $DOCS
+assign [class="evince"] $DOCS
+
+# Terminals
+assign [class="gnome-terminal"] $TERM
+
+# Dev
+assign [class="emacs"] $DEV
+
+# Media
+assign [class="VLC"] $MEDIA
+assign [class="mpv"] $MEDIA
+
+assign [class="Steam"] $GAME
+
+## Make window rules
+#
+# Examples:
+# for_window [class="Firefox"] floating enable
+# for_window [class="URxvt" workspace="(?!8)"] floating enable
+# for_window [class="Pidgin"] floating enable
+
+for_window [class="Steam"] floating enable
+
+## The status bar configuration
+
+# Define colors
+set $darkblack	#073642
+set $darkblue	#073642
+set $white	#eee8d5
+set $black	#002b36
+set $darkred	#dc322f
+set $brcyan	#93a1a1
+set $brblue	#839496
+set $bryellow	#657b83
+
+# Window colors           border      background   text            indicator   child_border
+client.focused            $bryellow   $bryellow    $white          $darkblue   $darkblack
+client.focused_inactive   $darkblack  $darkblack   $white          $darkblack  $darkblack
+client.unfocused          $darkblack  $darkblack   $white          $darkblack  $darkblack
+client.urgent             $darkblack  $darkblack   $white          $darkblack  $darkblack
+
+#new_window normal 4 px
+
+bar {
+    mode		dock
+    position 		top
+    status_command 	$path_to_bumblebee -m layout pulseaudio nic load battery datetime -p datetime.format="kl %k:%M | %d %b (%a) W:%V" -t solarized
+
+    tray_output		primary
+    colors {
+    	   background $black
+ 	   statusline #33aaff
+	   
+	   # <colorclass>	<border>	<background>	<text>
+	   focused_workspace	$bryellow	$bryellow	$white
+ 	   active_workspace 	$darkblue 	$darkblue 	$white
+	   inactive_workspace 	$black 		$black		$brblue
+ 	   urgent_workspace 	$darkred	$darkblack	$white
+	   
+    }
+}
+
+ 
+## Commands to be run at start of i3
+
+# Enable Svorak
+exec setxkbmap se dvorak
+
+# Disable Caps-Lock
+exec setxkbmap -option caps:none
+
+# Disable touchpad
+# exec xinput set-prop 11 "Device Enabled" 0
+
+exec --no-startup-id eval $(/usr/bin/gnome-keyring-daemon --start --components=pkcs11,secrets,ssh)
+exec compton
+exec sh ~/.fehbg			# Sets background
+exec dunst				# Start notification daemon
+exec pasystray				# Start PulseAudio systray
+exec --no-startup-id nm-applet		# Start Network Manager systray
+exec redshift
+exec nextcloud
+exec mullvad connect
+exec emacs --daemon
+
+#exec conky				
+#exec mpd
+#exec dropbox start
+
+# Locks computer after 30 minute
+exec xautolock -time 120 -locker i3lock -c 000000
