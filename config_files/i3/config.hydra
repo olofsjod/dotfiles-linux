@@ -76,7 +76,7 @@ set $GAME 7 
 #
 # DejaVu sans has higher priority than FontAwesome, both with the same
 # font size and it isn't possible to set font size per font.
-font pango:Tamzen, FontAwesome 12
+font pango:DejaVu Sans Mono, FontAwesome 12
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
@@ -304,7 +304,7 @@ bar {
     output          DP-0
     mode            dock
     position 		    top
-    status_command 	$path_to_bumblebee -m layout nic load datetime -p datetime.format="kl %k:%M | %d %b (%a) W:%V" -t solarized
+    status_command 	$path_to_bumblebee -m layout nic memory load datetime -p datetime.format="kl %k:%M | %d %b (%a) W:%V" -t solarized-powerline
 
     tray_output		primary
     colors {
@@ -341,6 +341,9 @@ bar {
 }
  
 ## Commands to be run at start of i3
+
+# Setup layout
+exec ~/.screenlayout/Desktop.sh
 
 # Enable Svorak
 exec setxkbmap se -layout dvorak
