@@ -1,0 +1,362 @@
+# i3 config for LASER (KTH)
+# by Olof Sjödin <me@olofsjodin.se> 2017-2023
+# ===========================================
+#
+# This is my i3 config on my main battlestation. Remember that to be able to run
+# this config you need additional dependencies.
+#
+# In the moment of writing the conditionally optional dependencies
+# are:
+#
+# - To use the media keys such as mute, raising/decreasing volume: amixer
+
+# - Status bar fonts: FontAwesome
+#   sudo apt install fonts-font-awesome
+# - Status bar: bumblebee-status
+# - Program launcher: rofi
+#   $ sudo apt install rofi
+#
+# - kbd-layout-toggle.py to change between dvorak and qwerty (https://github.com/olofsjod/kbd-layout-toggle)
+
+# Thoughts and philosophy about this config.
+# ------------------------------------------
+#
+# I've organized this configuration into seven parts in the following order:
+#
+# 1. Global variables
+# 2. Fonts
+# 3. Bindings
+# 4. Rules for moving windows to their workspace
+# 5. Window rules (floating, tiling etc)
+# 6. Status bar
+# 7. Autostart
+#
+#
+# Happy hacking!
+
+## Set global variables
+#
+# WARNING: This MUST be set before the others as they use the
+# variables set here.
+
+# Using the windows button as master key
+set $mod Mod4
+
+# Set paths
+set $path_to_bumblebee ~/.i3/bumblebee-status/bumblebee-status
+set $path_to_kbd_layout_toggle ~/.i3/kbd-layout-toggle/kbd-layout-toggle.py
+set $path_to_scrot_screenshots /home/olof/MEGA/Screenshots/
+
+# Set workspace names
+set $ONE 1 
+set $TWO 2
+set $THREE 3 
+set $FOUR 4
+set $FIVE 5 
+set $SIX 6
+set $SEVEN 7 
+set $EIGHT 8
+set $NINE 9 
+set $TEN 10 
+
+## Set the font
+# 
+# Example:
+# font pango:DejaVu sans, FontAwesome 10
+#
+# DejaVu sans has higher priority than FontAwesome, both with the same
+# font size and it isn't possible to set font size per font.
+font pango:DejaVu Sans Mono, FontAwesome 12
+
+# Use Mouse+$mod to drag floating windows to their wanted position
+floating_modifier $mod
+
+# No titlebar
+#new_window 1pixel
+
+focus_follows_mouse no
+
+## Bindings
+
+# start a terminal
+bindsym $mod+Return exec gnome-terminal
+
+# kill focused window
+bindsym $mod+w kill
+
+# start rofi (THE program launcher)
+bindsym $mod+d exec "rofi -combi-modi window,drun,run -show combi -modi combi"
+
+# change focus
+bindsym $mod+b focus left
+bindsym $mod+n focus down
+bindsym $mod+p focus up
+bindsym $mod+f focus right
+
+# alternatively, you can use the cursor keys:
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+
+# move focused window
+bindsym $mod+Shift+b move left
+bindsym $mod+Shift+n move down
+bindsym $mod+Shift+p move up
+bindsym $mod+Shift+f move right
+
+# alternatively, you can use the cursor keys:
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+
+# split in horizontal orientation
+bindsym $mod+h split h
+
+# split in vertical orientation
+bindsym $mod+v split v
+
+# enter fullscreen mode for the focused container
+bindsym $mod+shift+m fullscreen
+bindsym $mod+m exec python3 $path_to_kbd_layout_toggle --toggle
+
+# change container layout (stacked, tabbed, toggle split)
+bindsym $mod+s layout stacking
+bindsym $mod+t layout tabbed
+bindsym $mod+shift+s layout toggle split
+
+# toggle tiling / floating
+bindsym $mod+Shift+space floating toggle
+
+# change focus between tiling / floating windows
+bindsym $mod+space focus mode_toggle
+
+# focus the parent container
+bindsym $mod+shift+c focus parent
+
+# focus the child container
+bindsym $mod+c focus child
+
+# switch to workspace
+bindsym $mod+1 workspace $ONE
+bindsym $mod+2 workspace $TWO
+bindsym $mod+3 workspace $THREE
+bindsym $mod+4 workspace $FOUR
+bindsym $mod+5 workspace $FIVE
+bindsym $mod+6 workspace $SIX
+bindsym $mod+7 workspace $SEVEN
+bindsym $mod+8 workspace $EIGHT
+bindsym $mod+9 workspace $NINE
+bindsym $mod+0 workspace $TEN
+
+# move focused container to workspace
+bindsym $mod+Shift+1 move container to workspace $ONE
+bindsym $mod+Shift+2 move container to workspace $TWO
+bindsym $mod+Shift+3 move container to workspace $THREE
+bindsym $mod+Shift+4 move container to workspace $FOUR
+bindsym $mod+Shift+5 move container to workspace $FIVE
+bindsym $mod+Shift+6 move container to workspace $SIX
+bindsym $mod+Shift+7 move container to workspace $SEVEN
+bindsym $mod+Shift+8 move container to workspace $EIGHT
+bindsym $mod+Shift+9 move container to workspace $NINE
+bindsym $mod+Shift+0 move container to workspace $TEN
+
+# move focused workspace between monitors
+bindsym $mod+Ctrl+greater move workspace to output right
+bindsym $mod+Ctrl+less move workspace to output left
+
+# reload the configuration file
+bindsym $mod+o reload
+
+# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
+bindsym $mod+Shift+r restart
+
+# exit i3 (logs you out of your X session)
+bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
+
+bindsym $mod+x open
+
+# resize window (you can also use the mouse for that)
+mode "resize" {
+        # These bindings trigger as soon as you enter the resize mode
+
+        # Pressing left will shrink the window’s width.
+        # Pressing right will grow the window’s width.
+        # Pressing up will shrink the window’s height.
+        # Pressing down will grow the window’s height.
+        bindsym b resize shrink width 10 px or 10 ppt
+        bindsym p resize grow height 10 px or 10 ppt
+        bindsym n resize shrink height 10 px or 10 ppt
+        bindsym f resize grow width 10 px or 10 ppt
+
+        # same bindings, but for the arrow keys
+        bindsym Left resize shrink width 10 px or 10 ppt
+        bindsym Down resize grow height 10 px or 10 ppt
+        bindsym Up resize shrink height 10 px or 10 ppt
+        bindsym Right resize grow width 10 px or 10 ppt
+
+        # back to normal: Enter or Escape
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+
+bindsym $mod+r mode "resize"
+
+bindsym $mod+shift+x exec i3lock -c 000000
+
+# These binds the media keys to their respective action
+
+bindsym XF86AudioRaiseVolume exec amixer -q set Master 5%+
+bindsym XF86AudioLowerVolume exec amixer -q set Master 5%-
+
+# fixme, muting master causing speaker to mute and hence can't be
+# unmuted using the same command again. (check amixer. what is
+# "auto-mute mode"?)
+bindsym XF86AudioMute exec amixer -q set Master toggle
+
+bindsym XF86MonBrightnessUp exec xbacklight -inc 10
+bindsym shift+XF86MonBrightnessUp exec xbacklight -inc 1
+
+bindsym XF86MonBrightnessDown exec xbacklight -dec 10
+bindsym shift+XF86MonBrightnessDown exec xbacklight -dec 1
+
+bindsym --release Print exec scrot 'Screenshot %Y-%m-%d %H.%M.%S.png' -e 'mv "$f" "$path_to_scrot_screenshots"' && notify-send Screenshot "Screenshot!"
+bindsym --release Shift+Print exec scrot -s 'Screenshot %Y-%m-%d %H.%M.%S.png' -e 'mv "$f" "$path_to_scrot_screenshots"' && notify-send Screenshot "Screenshot!"
+
+# fixme, change it to mega
+# bindsym --release Shift+Print exec scrot -s 'Screenshot %Y-%m-%d %H.%M.%S.png' -e 'mv "$f" ~/Dropbox/Screenshots/ && dropbox sharelink ~/Dropbox/Screenshots/$f | xclip -r && notify-send Screenshot "A sharable link to your screenshot is now available in your clipboard." '
+
+# dropbox sharelink ~/Dropbox/Screenshots/$f | xclip -r && 
+
+# i3 gaps
+#gaps inner 5
+
+bindsym button4 nop
+bindsym button5 nop
+
+## Organize applications by moving them to their workspaces
+
+# Web
+assign [class="Chrome"] $ONE
+assign [class="Firefox"] $ONE
+
+# Docs
+assign [class="Libreoffice"] $THREE
+assign [class="evince"] $THREE
+
+# Terminals
+assign [class="gnome-terminal"] $FIVE
+
+# Dev
+assign [class="emacs"] $SEVEN
+
+# MATLAB
+assign [class="MATLAB"] $NINE
+
+# Files
+assign [class="Nautilus"] $TEN
+
+
+## Make window rules
+#
+# Examples:
+# for_window [class="Firefox"] floating enable
+# for_window [class="URxvt" workspace="(?!8)"] floating enable
+# for_window [class="Pidgin"] floating enable
+
+
+## The status bar configuration
+
+# Define colors
+set $darkblack	#073642
+set $darkblue	#073642
+set $white	#eee8d5
+set $black	#002b36
+set $darkred	#dc322f
+set $brcyan	#93a1a1
+set $brblue	#839496
+set $bryellow	#657b83
+
+# Window colors           border      background   text            indicator   child_border
+client.focused            $bryellow   $bryellow    $white          $darkblue   $darkblack
+client.focused_inactive   $darkblack  $darkblack   $white          $darkblack  $darkblack
+client.unfocused          $darkblack  $darkblack   $white          $darkblack  $darkblack
+client.urgent             $darkblack  $darkblack   $white          $darkblack  $darkblack
+
+#new_window normal 4 px
+
+bar {
+    # Screen to the left
+    output          DP-2
+    mode            dock
+    position 		    top
+    status_command 	$path_to_bumblebee -m layout nic memory load datetime -p datetime.format="kl %k:%M | %d %b (%a) W:%V" -t solarized-powerline
+
+    tray_output		primary
+    colors {
+    	     background $black
+           statusline #33aaff
+	   
+      	   # <colorclass>	<border>	<background>	<text>
+	         focused_workspace	$bryellow	$bryellow	$white
+           active_workspace 	$darkblue 	$darkblue 	$white
+	         inactive_workspace 	$black 		$black		$brblue
+ 	         urgent_workspace 	$darkred	$darkblack	$white
+	   
+    }
+}
+
+bar {
+    # Screen to the right
+    output          DP-1
+    mode            hide
+    position 		    bottom
+    status_command 	$path_to_bumblebee -m datetime -p datetime.format="kl %k:%M | %d %b (%a) W:%V" -t solarized
+
+    colors {
+    	     background $black
+           statusline #33aaff
+	   
+      	   # <colorclass>	<border>	<background>	<text>
+	         focused_workspace	$bryellow	$bryellow	$white
+           active_workspace 	$darkblue 	$darkblue 	$white
+	         inactive_workspace 	$black 		$black		$brblue
+ 	         urgent_workspace 	$darkred	$darkblack	$white
+	   
+    }
+}
+ 
+## Commands to be run at start of i3
+
+# Setup layout
+exec ~/.screenlayout/Desktop.sh
+
+# Enable Svorak
+exec setxkbmap se -layout dvorak
+
+# Disable Caps-Lock
+exec setxkbmap -option caps:none
+
+# Disable touchpad
+# exec xinput set-prop 11 "Device Enabled" 0
+
+exec --no-startup-id eval $(/usr/bin/gnome-keyring-daemon --start --components=pkcs11,secrets,ssh)
+#exec compton
+exec sh ~/.fehbg			# Sets background
+exec dunst				# Start notification daemon
+exec pasystray				# Start PulseAudio systray
+exec --no-startup-id nm-applet		# Start Network Manager systray
+
+#exec conky				
+#exec mpd
+#exec dropbox start
+
+# Locks computer after 30 minute
+exec xautolock -time 120 -locker i3lock -c 000000
+
+## i3 gaps
+
+gaps inner 20px
+gaps outer 5px
+
