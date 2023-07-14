@@ -48,10 +48,11 @@ set $path_to_kbd_layout_toggle ~/.i3/kbd-layout-toggle/kbd-layout-toggle.py
 set $path_to_scrot_screenshots /home/olof/MEGA/Screenshots/
 
 # Set workspace names
-set $ONE 1 
-set $TWO 2
-set $THREE 3 
-set $FOUR 4
+# FontAwesome Cheatsheet -> https://fontawesome.com/v4/cheatsheet/
+set $ONE 1  
+set $TWO 2 
+set $THREE 3 
+set $FOUR 4 
 set $FIVE 5 
 set $SIX 6
 set $SEVEN 7 
@@ -163,8 +164,8 @@ bindsym $mod+Shift+9 move container to workspace $NINE
 bindsym $mod+Shift+0 move container to workspace $TEN
 
 # move focused workspace between monitors
-bindsym $mod+Ctrl+greater move workspace to output right
-bindsym $mod+Ctrl+less move workspace to output left
+bindsym $mod+Shift+greater move workspace to output right
+bindsym $mod+less move workspace to output left
 
 # reload the configuration file
 bindsym $mod+o reload
@@ -204,22 +205,6 @@ mode "resize" {
 bindsym $mod+r mode "resize"
 
 bindsym $mod+shift+x exec i3lock -c 000000
-
-# These binds the media keys to their respective action
-
-bindsym XF86AudioRaiseVolume exec amixer -q set Master 5%+
-bindsym XF86AudioLowerVolume exec amixer -q set Master 5%-
-
-# fixme, muting master causing speaker to mute and hence can't be
-# unmuted using the same command again. (check amixer. what is
-# "auto-mute mode"?)
-bindsym XF86AudioMute exec amixer -q set Master toggle
-
-bindsym XF86MonBrightnessUp exec xbacklight -inc 10
-bindsym shift+XF86MonBrightnessUp exec xbacklight -inc 1
-
-bindsym XF86MonBrightnessDown exec xbacklight -dec 10
-bindsym shift+XF86MonBrightnessDown exec xbacklight -dec 1
 
 bindsym --release Print exec scrot 'Screenshot %Y-%m-%d %H.%M.%S.png' -e 'mv "$f" "$path_to_scrot_screenshots"' && notify-send Screenshot "Screenshot!"
 bindsym --release Shift+Print exec scrot -s 'Screenshot %Y-%m-%d %H.%M.%S.png' -e 'mv "$f" "$path_to_scrot_screenshots"' && notify-send Screenshot "Screenshot!"
@@ -262,7 +247,7 @@ assign [class="Nautilus"] $TEN
 #
 # Examples:
 # for_window [class="Firefox"] floating enable
-# for_window [class="URxvt" workspace="(?!8)"] floating enable
+for_window [class="MATLAB" workspace="(?!8)"] floating enable
 # for_window [class="Pidgin"] floating enable
 
 
@@ -310,7 +295,7 @@ bar {
 bar {
     # Screen to the right
     output          DP-1
-    mode            hide
+    mode            dock
     position 		    bottom
     status_command 	$path_to_bumblebee -m datetime -p datetime.format="kl %k:%M | %d %b (%a) W:%V" -t solarized
 
@@ -352,11 +337,13 @@ exec --no-startup-id nm-applet		# Start Network Manager systray
 #exec mpd
 #exec dropbox start
 
+exec --no-startup-id udiskie &
+
 # Locks computer after 30 minute
 exec xautolock -time 120 -locker i3lock -c 000000
 
 ## i3 gaps
 
-gaps inner 20px
+gaps inner 2px
 gaps outer 5px
 
