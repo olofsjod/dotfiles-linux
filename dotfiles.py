@@ -1,5 +1,8 @@
+#!/usr/bin/env python3
+
 # dotfiles.py
 # written by Olof Sjödin <me@olofsjodin.se> 2023-07-21
+# last modified 2024-05-09
 
 import argparse
 import os
@@ -53,10 +56,12 @@ def copy_config_files(conf_dir_path: str, to_dir_path: str, variant: str = ""):
 
     confdir_variants = get_variants_dictionary_from_dir_list(confdir_content)
 
-    for fname in filter(lambda f: not "~" in f, confdir_content):
+    has_variant = lambda f: not "~" in f
+
+    for fname in filter(has_variant, confdir_content):
         dstname = os.path.join(to_dir_path, "." + fname)
-        print(fname)
-        # Check whether variant exist or not
+
+        # Check whether a variant exist or not
         if variant in confdir_variants[fname]:
             srcname = os.path.join(conf_dir_path, f"{fname}~{variant}")
             copy_file_or_directory(srcname, dstname)
